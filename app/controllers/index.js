@@ -9,7 +9,7 @@ const xetLoaiDoiTuong = () => {
     let customerTab2 = getEle("#customerTab2");
     let customerTab3 = getEle("#customerTab3");
 
-    if ( loaiDoiTuong === "student" ) {
+    if ( loaiDoiTuong === "Student" ) {
         employeeTab1.classList.remove("d-block");
         employeeTab1.classList.add("d-none");
         employeeTab2.classList.remove("d-block");
@@ -28,7 +28,7 @@ const xetLoaiDoiTuong = () => {
         studentTab3.classList.remove("d-none");
         studentTab3.classList.add("d-block");
     }
-    else if ( loaiDoiTuong === "employee" ) {
+    else if ( loaiDoiTuong === "Employee" ) {
         studentTab1.classList.remove("d-block");
         studentTab1.classList.add("d-none");
         studentTab2.classList.remove("d-block");
@@ -47,7 +47,7 @@ const xetLoaiDoiTuong = () => {
         employeeTab2.classList.remove("d-none");
         employeeTab2.classList.add("d-block");
     }
-    else if ( loaiDoiTuong === "customer" ) {
+    else if ( loaiDoiTuong === "Customer" ) {
         studentTab1.classList.remove("d-block");
         studentTab1.classList.add("d-none");
         studentTab2.classList.remove("d-block");
