@@ -1,10 +1,3 @@
-// Mục đích làm thêm cái OBJ DSNV này là khi mình muốn mở rộng ra thêm tính năng quản lý nv giỏi, ql nv nghèo...bla...bla..., mà cùng chung muôn các thuộc tính của nhân viên phải đc thống nhất, ko đc có sự khác nhau dựa vbao2 người nhập thì mình nên làm cách này 
-// Mình sẽ tách 1 cái obj ra rồi khi thêm nhân viên vào viện nghèo, giỏi hay gì đó mình sẽ khai như sau
-// làm cách này thì sau này khi mình nảy ra thêm nhu cầu thêm viện gì gì đó thì sẽ có sự thống nhất các thuộc tính, đặt tên, ko có mỗi người 1 kiểu nữa
-// ví dụ khi mình khai báo new như sau bên index thì mình sẽ tạo dc 1 obj mới
-// var quanLySVNgheo = new DSSV()
-// var quanLySVGioi = new DSSV()
-// var quanLySVNgu = new DSSV()
 function ListPerson() {
     // mảng nhanVien này chứa các đối tượng nhân viên
     this.nhanVien = []; 

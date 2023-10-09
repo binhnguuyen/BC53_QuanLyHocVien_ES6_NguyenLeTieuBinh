@@ -2,7 +2,7 @@
 $( function() {
     $( "#datepicker" ).datepicker({
         showOn: "button",
-        buttonImage: "img/calendar-icon.png",
+        buttonImage: "./../asset/img/calendar-icon.png",
         buttonImageOnly: true,
         buttonText: "Select date",
         dateFormat: "mm/dd/yy"
@@ -22,3 +22,5 @@ $( document ).ready(function() {
     d.getFullYear();
     $('#datepicker').val(output);   
 });
+
+src
