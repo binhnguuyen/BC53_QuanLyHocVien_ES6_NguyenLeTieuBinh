@@ -86,6 +86,25 @@ const xetLoaiDoiTuong = () => {
     }
 }
 
+const fetchPerson = () => {
+    getPersonList()
+    // thành công thì in ra sp
+    .then(function (res) {
+        console.log(res.data);
+    //   renderProductsList(res.data);
+    //   offLoading();
+    })
+    // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
+    .catch(function (err) {
+      offLoading();
+      console.log("err", err);
+    })
+    // luôn luôn chạy dù thành công, thất bại
+    .finally(() =>{
+        console.log("Xong");
+    });
+}
+fetchPerson();
 
 
 // Muốn xài obj thì phải khai new trước
