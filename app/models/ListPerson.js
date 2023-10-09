@@ -5,7 +5,7 @@
 // var quanLySVNgheo = new DSSV()
 // var quanLySVGioi = new DSSV()
 // var quanLySVNgu = new DSSV()
-function DSNV() {
+function ListPerson() {
     // mảng nhanVien này chứa các đối tượng nhân viên
     this.nhanVien = []; 
 
