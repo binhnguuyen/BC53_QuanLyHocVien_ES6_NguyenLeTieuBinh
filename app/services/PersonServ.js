@@ -17,13 +17,13 @@ const delPersonList = (id) => {
     });
 }
 
-const addPersonList = () => {
+const addPersonList = (per) => {
     // nhớ phải có return
     return axios({
         url: BASE_URL,
         method: "POST",
         // phải có data mới up lên đc APi
-        data: person,
+        data: per,
     });
 }
 

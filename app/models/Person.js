@@ -17,9 +17,9 @@ class Person {
 class Student extends Person {
     constructor(_id, _name, _address, _email, _type, _toan, _ly, _hoa) {
         super(_id, _name, _address, _email, _type);
-        this.toan = _toan;
-        this.ly = _ly;
-        this.hoa = _hoa;
+        this.diemToan = _toan;
+        this.diemLy = _ly;
+        this.diemHoa = _hoa;
     }
 }
 

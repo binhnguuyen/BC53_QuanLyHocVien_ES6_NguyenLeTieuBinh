@@ -91,7 +91,7 @@ const fetchPerson = () => {
     getPersonList()
     // thành công thì in ra sp
     .then(function (res) {
-        console.log(res.data);
+        // console.log(res.data);
         renderTable(res.data);
     //   offLoading();
     })
@@ -127,6 +127,58 @@ const renderTable = (list) =>{
     getEle('#tableDanhSach').innerHTML = htmlContent;
 }
 
+const getInfo = () => {
+
+    // lấy nguyên cái form rồi dom vào
+    const elements = document.querySelectorAll('#personForm input, #personForm select');
+    let person = {};
+
+    elements.forEach((ele, index) => {
+        // console.log(ele.value, ele.name)
+        //destructuring
+        const { value, name } = ele;
+        person[name] = value;
+    });
+
+    // Destructuring (bóc tách phần tử)
+    const {id, namePerson, address, email, type, diemToan, diemLy, diemHoa, day, salary, congTy, hoaDon, danhGia} = person;
+
+    if ( person.type === "Student") {
+        return new Student( id, namePerson, address, email, type, diemToan, diemLy, diemHoa );
+    }
+    else if ( person.type === "Employee" ) {
+        return new Employee( id, namePerson, address, email, type, day, salary );
+    }
+    else if ( person.type === "Customer" ) {
+        return new Customer( id, namePerson, address, email, type, congTy, hoaDon, danhGia );
+    }
+    else {
+        // do nothing
+    }
+}
+
+getEle("#btnThemNV").onclick = () =>{
+    // lấy thông tin món ăn từ user nhập lên form
+    const person = getInfo();
+    console.log('person: ', person);
+
+    addPersonList(person)
+    .then((res) => {
+        console.log("res.data", res.data);
+        // call API lấy lại danh sách món ăn mới sau khi thêm thành công
+        fetchPerson();
+        // Đóng modal sau khi add
+        getEle("#btnDong").click();
+
+    })
+    .catch((err) => {
+        console.log("err: ", err);
+    })
+    // luôn luôn chạy dù thành công, thất bại
+    .finally(() =>{
+        console.log("Xong");
+    });
+}
 
 // Muốn xài obj thì phải khai new trước
 // bằng cách dùng cái DSNV này mình ko cần phải new những cái obj mới khi mình muốn thêm obj mới

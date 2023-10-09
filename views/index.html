@@ -211,14 +211,15 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 
-					<form role="form">
+					<form role="form" id="personForm">
 						<!-- Chọn loại người dùng -->
 						<div class="form-group">
+							<label>Đối tượng</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
 								</div>
-								<select class="form-control" id="loaiNguoiDung" onchange="xetLoaiDoiTuong()">
+								<select class="form-control" id="loaiNguoiDung" name="type" onchange="xetLoaiDoiTuong()">
 									<option>Chọn đối tượng</option>
 									<option value="Student">Học Sinh</option>
 									<option value="Employee">Giảng viên</option>
@@ -231,6 +232,7 @@
 
 						<!-- Mã người dùng -->
 						<div class="form-group">
+							<label>Mã người dùng</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-id-card"></i></span>
@@ -244,11 +246,12 @@
 
 						<!-- Tên người dùng -->
 						<div class="form-group">
+							<label>Họ và tên</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-user"></i></span>
 								</div>
-								<input type="name" name="name" id="personName" class="form-control input-sm"
+								<input type="name" name="namePerson" id="personName" class="form-control input-sm"
 									placeholder="Họ và tên">
 							</div>
 							<span class="sp-thongbao" id="tbName"></span>
@@ -256,6 +259,7 @@
 
 						<!-- Địa chỉ người dùng -->
 						<div class="form-group">
+							<label>Địa chỉ</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-address-book"></i></span>
@@ -269,6 +273,7 @@
 
 						<!-- Email người dùng -->
 						<div class="form-group">
+							<label>Email</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-envelope"></i></span>
@@ -282,6 +287,7 @@
 
 						<!-- Điểm toán người dùng -->
 						<div id="studentTab1" class="form-group d-none">
+							<label>Điểm toán</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-book"></i></span>
@@ -294,6 +300,7 @@
 
 						<!-- Điểm lý người dùng -->
 						<div id="studentTab2" class="form-group d-none">
+							<label>Điểm lý</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-book"></i></span>
@@ -306,6 +313,7 @@
 						
 						<!-- Điểm hoá người dùng -->
 						<div id="studentTab3" class="form-group d-none">
+							<label>Điểm hoá</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-book"></i></span>
@@ -318,6 +326,7 @@
 
 						<!-- Số ngày làm -->
 						<div id="employeeTab1" class="form-group d-none">
+							<label>Số ngày làm</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
@@ -330,9 +339,10 @@
 
 						<!-- Lương theo ngày -->
 						<div id="employeeTab2" class="form-group d-none">
+							<label>Lương theo ngày</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+									<span class="input-group-text"><i class="fa fa-credit-card"></i></span>
 								</div>
 								<input type="number" name="salary" id="employeeSalary" class="form-control input-sm"
 									placeholder="Lương theo ngày">
@@ -342,9 +352,10 @@
 
 						<!-- Công ty -->
 						<div id="customerTab1" class="form-group d-none">
+							<label>Công ty</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+									<span class="input-group-text"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
 								</div>
 								<input type="text" name="congTy" id="customerCongTy" class="form-control input-sm"
 									placeholder="Tên công ty">
@@ -354,9 +365,10 @@
 
 						<!-- Trị giá hoá đơn -->
 						<div id="customerTab2" class="form-group d-none">
+							<label>Hoá đơn</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+									<span class="input-group-text"><i class="fa fa-credit-card"></i></span>
 								</div>
 								<input type="number" name="hoaDon" id="customerHoaDon" class="form-control input-sm"
 									placeholder="Trị giá hoá đơn">
@@ -366,13 +378,19 @@
 
 						<!-- Đánh giá -->
 						<div id="customerTab3" class="form-group d-none">
+							<label>Đánh giá</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+									<span class="input-group-text"><i class="fa fa-star"></i></span>
 								</div>
-								<input type="number" name="danhGia" id="customerDanhGia" class="form-control input-sm"
-									placeholder="Đánh giá">
+								<select class="form-control" name="danhGia" id="customerDanhGia">
+									<option>Chọn đánh giá</option>
+									<option value="excellent">Xuất sắc</option>
+									<option value="good">Tốt</option>
+									<option value="normal">Khá</option>
+								</select>
 							</div>
+
 							<span class="sp-thongbao" id="tbDanhGia"></span>
 						</div>
 
@@ -422,7 +440,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
       integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	  
+
 	<!-- nhớ phải cho obj trong model gán trước controller -->
 	<script src="./../app/models/Person.js"></script>
 	<script src="./../app/models/ListPerson.js"></script>
