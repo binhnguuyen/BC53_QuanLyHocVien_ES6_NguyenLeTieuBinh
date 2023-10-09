@@ -118,8 +118,8 @@ const renderTable = (list) =>{
                 <td>${value.email}</td>
                 <td>${value.type}</td>
                 <td>
-                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="editFood(${value.id})">Edit</button>
-                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deleteFood(${value.id})">Delete</button>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
                 </td>
             </tr>
         `
@@ -170,6 +170,22 @@ getEle("#btnThemNV").onclick = () =>{
         // Đóng modal sau khi add
         getEle("#btnDong").click();
 
+    })
+    .catch((err) => {
+        console.log("err: ", err);
+    })
+    // luôn luôn chạy dù thành công, thất bại
+    .finally(() =>{
+        console.log("Xong");
+    });
+}
+
+window.deletePerson = (id) => {
+    delPersonList(id)
+    .then((res) => {
+        console.log("res.data", res.data);
+        // call API lấy lại danh sách món ăn mới sau khi xoá thành công
+        fetchPerson();
     })
     .catch((err) => {
         console.log("err: ", err);
