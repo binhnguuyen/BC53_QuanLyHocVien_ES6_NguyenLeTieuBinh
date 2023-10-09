@@ -1,12 +1,45 @@
 const BASE_URL = "https://651d525844e393af2d598dd0.mockapi.io/person";
 
+
 class ListPerson {
+    
     // mảng đối tượng này chứa các đối tượng khác nhau
-    constructor(_student, _employee, _customer) {
-        this.Student = _student;
-        this.Employee = _employee;
-        this.Customer = _customer;
+    constructor(
+        _id,
+        _name,
+        _address,
+        _email,
+        _type,
+        _toan,
+        _ly,
+        _hoa,
+        _day,
+        _salary,
+        _congTy,
+        _hoaDon,
+        _danhGia   
+        ) {
+        this.id = _id;
+        this.namePerson = _name;
+        this.address = _address;
+        this.email = _email;
+        this.type = _type;
+        this.diemToan = _toan;
+        this.diemLy = _ly;
+        this.diemHoa = _hoa;
+        this.day = _day;
+        this.salary = _salary;
+        this.congTy = _congTy;
+        this.hoaDon = _hoaDon;
+        this.danhGia = _danhGia;
+        
+        this.person = [];
     }
+    
+    // Phương thức thêm product, hàm này chỉ có chức năng duy nhất là thêm sản phẩm
+    addPerson = (sp) => {
+        this.person.push(sp);
+    };
 
 }
 
