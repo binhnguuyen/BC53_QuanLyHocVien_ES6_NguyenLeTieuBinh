@@ -87,16 +87,17 @@ const xetLoaiDoiTuong = () => {
 }
 
 const fetchPerson = () => {
+    
     getPersonList()
     // thành công thì in ra sp
     .then(function (res) {
         console.log(res.data);
-    //   renderProductsList(res.data);
+        renderTable(res.data);
     //   offLoading();
     })
     // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
     .catch(function (err) {
-      offLoading();
+    //   offLoading();
       console.log("err", err);
     })
     // luôn luôn chạy dù thành công, thất bại
@@ -105,6 +106,26 @@ const fetchPerson = () => {
     });
 }
 fetchPerson();
+
+const renderTable = (list) =>{
+    let htmlContent = "";
+    list.forEach((value) => {
+        htmlContent += `
+            <tr>
+                <td>${value.id}</td>
+                <td>${value.namePerson}</td>
+                <td>${value.address}</td>
+                <td>${value.email}</td>
+                <td>${value.type}</td>
+                <td>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="editFood(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deleteFood(${value.id})">Delete</button>
+                </td>
+            </tr>
+        `
+    })
+    getEle('#tableDanhSach').innerHTML = htmlContent;
+}
 
 
 // Muốn xài obj thì phải khai new trước
