@@ -1,100 +1,136 @@
-function ListPerson() {
-    // mảng nhanVien này chứa các đối tượng nhân viên
-    this.nhanVien = []; 
+const BASE_URL = "https://651d525844e393af2d598dd0.mockapi.io/person";
 
-    // tìm hiểu thêm new Map, new Set
 
-    // Phương thức thêm nhân viên, hàm này chỉ có chức năng duy nhất là thêm nhân viên
-    this._themNhanVien = function (nv) {
-        this.nhanVien.push(nv);
-    };
-
-    // Phương thức tìm vị trí nhân viên
-    this._timViTriNhanVien = function (tkNV) {
-        // mở lên xem thử coi có ra đc tkNV ko
-        // alert("ma SV" + tkNV);
-        /**
-       * Tìm vị trí
-       *   index = -1
-       *  - Duyệt mảng => lấy từng object sinh vien
-       *               => {tkNV: 1, tenSV: Nguyen Van A.,...}
-       *               => so sánh cái tkNV trong object bằng tkNV truyền vào
-       *               => gán lại ví trí index = i , break;
-       *               => không tìm thấy nhanVien thì index = -1
-       */
-        var index = -1;
-        for (var i = 0; i < this.nhanVien.length; i++) {
-            var nv = dsnv.nhanVien[i]; // {tkNV: ..., tenNV: Nguyen Van A...,...}
-            if (nv.tkNV == tkNV) {
-                index = i;
-                // nếu đúng rồi thì break luôn ko cần duyệt nữa
-                break;
-            }
-        }
-        return index;
-    };
-
-    // Phương thức tìm vị trí nhân viên
-    /*
-    this._timViTriNhanVienTheoLoai = function (loaiNV) {
-
-        var index = [];
-        for (var i = 0; i < this.nhanVien.length; i++) {
-            var nv = dsnv.nhanVien[i]; // {tkNV: ..., tenNV: Nguyen Van A...,...}
-            if (nv.xepLoai() == loaiNV) {
-                index += i;
-            }
-        }
-        return index;
-    };
-    */
-
-    // Phương thức lấy thông tin nhân viên
-    this._layThongTinNhanVien = function (tkNV) {
-        var index = this._timViTriNhanVien(tkNV);
-        // nhanVien[index] : {tkNV:1, name: "",...}
-        if (index !== -1) {
-            var nv = this.nhanVien[index];
-            return nv;
-        }
+class ListPerson {
+    
+    // mảng đối tượng này chứa các đối tượng khác nhau
+    constructor(
+        _id,
+        _name,
+        _address,
+        _email,
+        _type,
+        _toan,
+        _ly,
+        _hoa,
+        _day,
+        _salary,
+        _congTy,
+        _hoaDon,
+        _danhGia   
+        ) {
+        this.id = _id;
+        this.namePerson = _name;
+        this.address = _address;
+        this.email = _email;
+        this.type = _type;
+        this.diemToan = _toan;
+        this.diemLy = _ly;
+        this.diemHoa = _hoa;
+        this.day = _day;
+        this.salary = _salary;
+        this.congTy = _congTy;
+        this.hoaDon = _hoaDon;
+        this.danhGia = _danhGia;
+        
+        this.person = [];
     }
-
-    // Phương thức xoá nhân viên
-    this._xoaNhanVien = function (tkNV) {
-        // có thể xoá trực tiếp mà ko cần tìm index
-        // mình có thể chạy for, nếu tkNV giống nhau thì xoá phần tử nhanVien đó
-        var index = this._timViTriNhanVien(tkNV);
-        if (index !== -1) {
-            // Xoá phần tử của mảng: dùng splice dựa vào vị trí và số lượng
-            this.nhanVien.splice(index, 1);
-        }
+    
+    // Phương thức thêm product, hàm này chỉ có chức năng duy nhất là thêm sản phẩm
+    addPerson = (sp) => {
+        this.person.push(sp);
     };
 
-    // Phương thức sửa nhân viên
-    this._capNhatNhanVien = function (nhanVien) {
-        // nhanVien: {tkNV:"" , name:""}
-        // tìm vị trí dựo vào
-        var index = this._timViTriNhanVien(nhanVien.tkNV);
-        // console.log("index: ", index);
-        // this.nhanVien[index];
-        // console.log('this.nhanVien[index];: ', this.nhanVien[index]);
-        // lặp qua cái this.nhanVien và thay đổi giá trị mới... Các bạn về làm
-        // this.nhanVien[index] lấy ra giá trị phần tử tại vị trí index trong mảng nhanVien
-        // sau đó gán giá trị mới cho nó là nhanVien
-        if (index !== -1) {
-            this.nhanVien[index] = nhanVien;
-        }
-    };
-
-    // Phương thức tìm sinh viên
-    this.timNhanVien = function (loaiNV) {
-        var index = this._timViTriNhanVienTheoLoai(loaiNV);
-        // nhanVien[index] : {tkNV:1, name: "",...}
-        if (index !== -1) {
-            var sv = this.nhanVien[index];
-            return sv;
-        }
-    }
 }
+
+// Class for creating multi inheritance.
+// class multi
+// {
+// 	// Inherit method to create base classes.
+// 	static inherit(..._bases)
+// 	{
+// 		class classes {
+
+// 			// The base classes
+//   			get base() { return _bases; }
+
+// 			constructor(..._args)
+// 			{
+// 				var index = 0;
+
+// 				for (let b of this.base) 
+// 				{
+// 					let obj = new b(_args[index++]);
+//    					multi.copy(this, obj);
+// 				}
+// 			}
+		
+// 		}
+
+// 		// Copy over properties and methods
+// 		for (let base of _bases) 
+// 		{
+//    			multi.copy(classes, base);
+//    			multi.copy(classes.prototype, base.prototype);
+// 		}
+
+// 		return classes;
+// 	}
+
+// 	// Copies the properties from one class to another
+// 	static copy(_target, _source) 
+// 	{
+//     		for (let key of Reflect.ownKeys(_source)) 
+// 			{
+//         		if (key !== "constructor" && key !== "prototype" && key !== "name") 
+// 				{
+// 	        	    let desc = Object.getOwnPropertyDescriptor(_source, key);
+// 	        	    Object.defineProperty(_target, key, desc);
+//         		}
+//     		}
+// 	}
+// }
+
+// // class Dog{
+// // 	constructor(hands){
+// //   	this.hand = hands;
+// //   }
+  
+// //   callHandDog(){
+// //   	console.log('callHandDog>>', this.hand);
+// //   }
+// // }
+
+// // class Pig{
+// // 	constructor(hands){
+// //   	this.hand = hands;
+// //   }
+  
+// //   callHandPig(){
+// //   	console.log('callHandPig>>', this.hand);
+// //   }
+  
+// // }
+
+
+// class ListPerson extends multi.inherit(Student, Employee, Customer){
+// 	constructor(_id, _name, _address, _email, _toan, _ly, _hoa, _day, _salary, _congTy, _hoaDon, _danhGia){
+//     super(_id, _name, _address, _email);
+  	
+//   }
+  
+//   init(){
+//   	super.callHandPig();
+//     super.callHandDog();
+//   }
+  
+// }
+
+// const _animal = new Animal(4);
+// _animal.init();
+//(index):97 callHandPig>> 4
+//(index):87 callHandDog>> 4
+
+
 
 

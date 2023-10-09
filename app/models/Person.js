@@ -4,26 +4,28 @@ class Person {
         _name,
         _address,
         _email,
+        _type
     ) {
         this.id = _id;
         this.namePerson = _name;
         this.address = _address;
         this.email = _email;
+        this.type = _type;
     }
 }
 
 class Student extends Person {
-    constructor(_id, _name, _address, _email, _toan, _ly, _hoa) {
-        super(id, namePerson, address, email);
-        this.toan = _toan;
-        this.ly = _ly;
-        this.hoa = _hoa;
+    constructor(_id, _name, _address, _email, _type, _toan, _ly, _hoa) {
+        super(_id, _name, _address, _email, _type);
+        this.diemToan = _toan;
+        this.diemLy = _ly;
+        this.diemHoa = _hoa;
     }
 }
 
 class Employee extends Person {
-    constructor(_id, _name, _address, _email, _day, _salary) {
-        super(id, namePerson, address, email);
+    constructor(_id, _name, _address, _email, _type, _day, _salary) {
+        super(_id, _name, _address, _email, _type);
         this.day = _day;
         this.salary = _salary;
 
@@ -31,8 +33,8 @@ class Employee extends Person {
 }
 
 class Customer extends Person {
-    constructor(_id, _name, _address, _email, _congTy, _hoaDon, _danhGia) {
-        super(id, namePerson, address, email);
+    constructor(_id, _name, _address, _email, _type, _congTy, _hoaDon, _danhGia) {
+        super(_id, _name, _address, _email, _type);
         this.congTy = _congTy;
         this.hoaDon = _hoaDon;
         this.danhGia = _danhGia;

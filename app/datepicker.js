@@ -22,5 +22,3 @@ $( document ).ready(function() {
     d.getFullYear();
     $('#datepicker').val(output);   
 });
-
-src
