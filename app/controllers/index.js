@@ -1,5 +1,5 @@
 const xetLoaiDoiTuong = () => {
-    let loaiDoiTuong = getEle("#loaiNguoiDung").value;
+    let loaiDoiTuong = getEle("#personType").value;
     let studentTab1 = getEle("#studentTab1");
     let studentTab2 = getEle("#studentTab2");
     let studentTab3 = getEle("#studentTab3");
@@ -118,7 +118,7 @@ const renderTable = (list) =>{
                 <td>${value.email}</td>
                 <td>${value.type}</td>
                 <td>
-                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
                     <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
                 </td>
             </tr>
@@ -134,10 +134,11 @@ const getInfo = () => {
     let person = {};
 
     elements.forEach((ele, index) => {
-        // console.log(ele.value, ele.name)
+        console.log(ele.value, ele.name, index)
         //destructuring
         const { value, name } = ele;
         person[name] = value;
+
     });
 
     // Destructuring (bóc tách phần tử)
@@ -186,6 +187,82 @@ window.deletePerson = (id) => {
         console.log("res.data", res.data);
         // call API lấy lại danh sách món ăn mới sau khi xoá thành công
         fetchPerson();
+    })
+    .catch((err) => {
+        console.log("err: ", err);
+    })
+    // luôn luôn chạy dù thành công, thất bại
+    .finally(() =>{
+        console.log("Xong");
+    });
+}
+
+window.editPerson = (id) => {
+    // ẩn btn thêm nhân viên
+    getEle('#btnThemNV').style.display = 'none'
+    // hiện thị btn cập nhật
+    getEle('#btnCapNhat').style.display = 'inline-block'
+
+    editPersonByID(id)
+    .then((res) => {
+        console.log("res.data", res.data);
+        let person = res.data
+
+        // đưa person.id vào trong button cập nhật
+        // khi làm thế này thì cái button cập nhật của mình sẽ thêm vào cái data-id có id bằng cái id của food mình ấn sửa
+        getEle("#btnCapNhat").setAttribute("data-id", person.id);
+
+        getEle("#personID").value = person.id;
+        getEle("#personName").value = person.namePerson;
+        getEle("#personAddress").value = person.address;
+        getEle("#personEmail").value = person.email;
+        getEle("#personType").value = person.type;
+        xetLoaiDoiTuong();
+        if ( person.type === "Student") {
+            getEle("#studentDiemToan").value = person.diemToan;
+            getEle("#studentDiemLy").value = person.diemLy;
+            getEle("#studentDiemHoa").value = person.diemHoa;
+        }
+        else if ( person.type === "Employee" ) {
+            getEle("#employeeDay").value = person.day;
+            getEle("#employeeSalary").value = person.salary;
+        }
+        else if ( person.type === "Customer" ) {
+            getEle("#customerCongTy").value = person.congTy;
+            getEle("#customerHoaDon").value = person.hoaDon;
+            getEle("#customerDanhGia").value = person.danhGia;
+        }
+        else {
+            // do nothing
+        }
+    })
+    .catch((err) => {
+        console.log("err: ", err);
+    })
+    // luôn luôn chạy dù thành công, thất bại
+    .finally(() =>{
+        console.log("Xong");
+    });
+}
+
+// Cập nhật person
+window.updatePerson = () => {
+
+    // lấy thông tin person sau khi chỉnh sửa
+    const person = getInfo();
+
+    // lấy id của person muốn cập nhật
+    // cái data-id này đã đc set trong hàm editPerson
+    const idPer = getEle("#btnCapNhat").getAttribute("data-id")
+
+    updatePersonByID(idPer, person)
+    .then((res) => {
+        console.log("res.data", res.data);
+        
+        // call API lấy lại danh sách person mới sau khi xoá thành công
+        fetchPerson();
+        // cập nhât xong thì đóng modal
+        getEle("#btnDong").click();
     })
     .catch((err) => {
         console.log("err: ", err);

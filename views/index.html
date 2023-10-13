@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Quản lý nhân viên</title>
+	<title>Quản lý viện nghiên cứu và giảng dạy</title>
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -219,7 +219,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
 								</div>
-								<select class="form-control" id="loaiNguoiDung" name="type" onchange="xetLoaiDoiTuong()">
+								<select class="form-control" id="personType" name="type" onchange="xetLoaiDoiTuong()">
 									<option>Chọn đối tượng</option>
 									<option value="Student">Học Sinh</option>
 									<option value="Employee">Giảng viên</option>
@@ -227,7 +227,7 @@
 								</select>
 							</div>
 
-							<span class="sp-thongbao" id="tbLoaiNguoiDung"></span>
+							<span class="sp-thongbao" id="tbType"></span>
 						</div>
 
 						<!-- Mã người dùng -->
@@ -400,7 +400,7 @@
 				<!-- Modal footer -->
 				<div class="modal-footer" id="modal-footer">
 					<button onclick="ThemNV()" id="btnThemNV" type="button" class="btn btn-success">Thêm người dùng</button>
-					<button id="btnCapNhat" onclick="capNhatNV()" type="button" class="btn btn-success">Cập nhật</button>
+					<button id="btnCapNhat" onclick="updatePerson()" type="button" class="btn btn-success">Cập nhật</button>
 					<button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 
