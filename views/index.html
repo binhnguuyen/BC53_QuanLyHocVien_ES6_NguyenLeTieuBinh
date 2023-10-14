@@ -130,7 +130,7 @@
 									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
 								</div>
 								<select class="form-control" id="selectPersonType"name="type" onchange="filterPerson()">
-									<option>Chọn đối tượng</option>
+									<option value="All">Chọn đối tượng</option>
 									<option value="Student">Học Sinh</option>
 									<option value="Employee">Giảng viên</option>
 									<option value="Customer">Khách hàng</option>
@@ -143,7 +143,7 @@
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Loại nhân viên" id="searchName">
 									<div class="input-group-prepend">
-										<button onclick="timNV()" id="btnTimNV" class="btn btn-primary"><i class="fa fa-search"></i></button>
+										<button onclick="findPersonByName()" id="btnTimNV" class="btn btn-primary"><i class="fa fa-search"></i></button>
 										<!-- <span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i></span> -->
 									</div>
 								</div>
@@ -172,6 +172,9 @@
 									</table>
 								</div>
 							</div>
+						</div>
+						<div class="sp-thongbao text-danger d-none text-danger" id="tbFilterPerson">
+							Không tìm thấy
 						</div>
 						<table class="table table-bordered table-hover myTable">
 							<thead class="text-primary">
