@@ -27,6 +27,34 @@ const addPersonList = (per) => {
     });
 }
 
+const addStudentList = (per) => {
+    // nhớ phải có return
+    return axios({
+        url: BASE_URL,
+        method: "POST",
+        // phải có data mới up lên đc APi
+        data: {
+            // spread operator
+            ...per,
+            diemTB: per.tinhDiemTB(),
+        },
+    });
+}
+
+const addEmployeeList = (per) => {
+    // nhớ phải có return
+    return axios({
+        url: BASE_URL,
+        method: "POST",
+        // phải có data mới up lên đc APi
+        data: {
+            // spread operator
+            ...per,
+            tienLuong: per.tinhLuong(),
+        },
+    });
+}
+
 const editPersonByID = (id) => {
     // nhớ phải có return
     return axios({

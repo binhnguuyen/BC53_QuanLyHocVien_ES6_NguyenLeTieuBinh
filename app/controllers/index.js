@@ -4,6 +4,9 @@
  * Tham số: không
  * Chú ý:
  */
+const student = "Student";
+const employee = "Employee";
+const customer = "Customer";
 const xetLoaiDoiTuong = () => {
     let loaiDoiTuong = getEle("#personType").value;
     let studentTab1 = getEle("#studentTab1");
@@ -15,7 +18,7 @@ const xetLoaiDoiTuong = () => {
     let customerTab2 = getEle("#customerTab2");
     let customerTab3 = getEle("#customerTab3");
 
-    if (loaiDoiTuong === "Student") {
+    if (loaiDoiTuong === student) {
         employeeTab1.classList.remove("d-block");
         employeeTab1.classList.add("d-none");
         employeeTab2.classList.remove("d-block");
@@ -34,7 +37,7 @@ const xetLoaiDoiTuong = () => {
         studentTab3.classList.remove("d-none");
         studentTab3.classList.add("d-block");
     }
-    else if (loaiDoiTuong === "Employee") {
+    else if (loaiDoiTuong === employee) {
         studentTab1.classList.remove("d-block");
         studentTab1.classList.add("d-none");
         studentTab2.classList.remove("d-block");
@@ -53,7 +56,7 @@ const xetLoaiDoiTuong = () => {
         employeeTab2.classList.remove("d-none");
         employeeTab2.classList.add("d-block");
     }
-    else if (loaiDoiTuong === "Customer") {
+    else if (loaiDoiTuong === customer) {
         studentTab1.classList.remove("d-block");
         studentTab1.classList.add("d-none");
         studentTab2.classList.remove("d-block");
@@ -93,6 +96,8 @@ const xetLoaiDoiTuong = () => {
 }
 
 
+
+
 /**
  * @param {*} fetchPerson
  * Chức năng: fetch dữ liệu từ API về
@@ -126,7 +131,30 @@ fetchPerson();
  * Tham số: không
  * Chú ý:
  */
+let trDiemToan = getEle("#trDiemToan");
+let trDiemLy = getEle("#trDiemLy");
+let trDiemHoa = getEle("#trDiemHoa");
+let trDiemTB = getEle("#trDiemTB");
+let trDay = getEle("#trDay");
+let trSalaryForDay = getEle("#trSalaryForDay");
+let trSalary = getEle("#trSalary");
+let trCongTy = getEle("#trCongTy");
+let trHoaDon = getEle("#trHoaDon");
+let trDanhGia = getEle("#trDanhGia");
+
 const renderTable = (list) => {
+
+    trDiemToan.classList.add("d-none");
+    trDiemLy.classList.add("d-none");
+    trDiemHoa.classList.add("d-none");
+    trDiemTB.classList.add("d-none");
+    trDay.classList.add("d-none");
+    trSalaryForDay.classList.add("d-none");
+    trSalary.classList.add("d-none");
+    trCongTy.classList.add("d-none");
+    trHoaDon.classList.add("d-none");
+    trDanhGia.classList.add("d-none");
+
     let htmlContent = "";
     list.forEach((value) => {
         htmlContent += `
@@ -144,6 +172,98 @@ const renderTable = (list) => {
         `
     })
     getEle('#tableDanhSach').innerHTML = htmlContent;
+}
+
+
+/**
+ * @param {*} renderTableByType
+ * Chức năng: render dữ liệu ra giao diện
+ * Tham số: không
+ * Chú ý:
+ */
+const renderTableByType = (list) => {
+
+    trDiemToan.classList.add("d-none");
+    trDiemLy.classList.add("d-none");
+    trDiemHoa.classList.add("d-none");
+    trDiemTB.classList.add("d-none");
+    trDay.classList.add("d-none");
+    trSalaryForDay.classList.add("d-none");
+    trSalary.classList.add("d-none");
+    trCongTy.classList.add("d-none");
+    trHoaDon.classList.add("d-none");
+    trDanhGia.classList.add("d-none");
+    let htmlContent = "";
+
+    list.forEach((value) => {
+        if (value.type === student) {
+            trDiemToan.classList.remove("d-none");
+            trDiemLy.classList.remove("d-none");
+            trDiemHoa.classList.remove("d-none");
+            trDiemTB.classList.remove("d-none");
+            htmlContent += `
+            <tr>
+                <td>${value.id}</td>
+                <td>${value.namePerson}</td>
+                <td>${value.address}</td>
+                <td>${value.email}</td>
+                <td>${value.type}</td>
+                <td>${value.diemToan}</td>
+                <td>${value.diemLy}</td>
+                <td>${value.diemHoa}</td>
+                <td>${value.diemTB}</td>
+                <td>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
+                </td>
+            </tr>
+            `
+        }
+        else if (value.type === employee) {
+            trDay.classList.remove("d-none");
+            trSalaryForDay.classList.remove("d-none");
+            trSalary.classList.remove("d-none");
+            htmlContent += `
+            <tr>
+                <td>${value.id}</td>
+                <td>${value.namePerson}</td>
+                <td>${value.address}</td>
+                <td>${value.email}</td>
+                <td>${value.type}</td>
+                <td>${value.day}</td>
+                <td>${value.salary}</td>
+                <td>${value.tienLuong}</td>
+                <td>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
+                </td>
+            </tr>
+            `
+        }
+        else if (value.type === customer) {
+            trCongTy.classList.remove("d-none");
+            trHoaDon.classList.remove("d-none");
+            trDanhGia.classList.remove("d-none");
+            htmlContent += `
+            <tr>
+                <td>${value.id}</td>
+                <td>${value.namePerson}</td>
+                <td>${value.address}</td>
+                <td>${value.email}</td>
+                <td>${value.type}</td>
+                <td>${value.congTy}</td>
+                <td>${value.hoaDon}</td>
+                <td>${value.danhGia}</td>
+                <td>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
+                </td>
+            </tr>
+            `
+        }
+    })
+    getEle('#tableDanhSach').innerHTML = htmlContent;
+
 }
 
 
@@ -191,26 +311,66 @@ const getInfo = () => {
  * Chú ý: thêm hàm editFood vào đối tượng window, khi mình ấn edit thì nó sẽ đi tìm trong window có hàm editFood hay ko
  */
 const addPerson = () => {
+    let loaiDoiTuong = getEle("#personType").value;
     // lấy thông tin món ăn từ user nhập lên form
     const person = getInfo();
-    // console.log('person: ', person);
 
-    addPersonList(person)
-        .then((res) => {
-            console.log("res.data", res.data);
-            // call API lấy lại danh sách người dùng mới sau khi thêm thành công
-            fetchPerson();
-            // Đóng modal sau khi add
-            getEle("#btnDong").click();
+    if (loaiDoiTuong === student) {
+        addStudentList(person)
+            .then((res) => {
+                console.log("res.data", res.data);
+                // call API lấy lại danh sách người dùng mới sau khi thêm thành công
+                fetchPerson();
+                // Đóng modal sau khi add
+                getEle("#btnDong").click();
 
-        })
-        .catch((err) => {
-            console.log("err: ", err);
-        })
-        // luôn luôn chạy dù thành công, thất bại
-        .finally(() => {
-            console.log("Xong");
-        });
+            })
+            .catch((err) => {
+                console.log("err: ", err);
+            })
+            // luôn luôn chạy dù thành công, thất bại
+            .finally(() => {
+                console.log("Xong");
+            });
+    }
+    else if (loaiDoiTuong === employee) {
+        addEmployeeList(person)
+            .then((res) => {
+                console.log("res.data", res.data);
+                // call API lấy lại danh sách người dùng mới sau khi thêm thành công
+                fetchPerson();
+                // Đóng modal sau khi add
+                getEle("#btnDong").click();
+
+            })
+            .catch((err) => {
+                console.log("err: ", err);
+            })
+            // luôn luôn chạy dù thành công, thất bại
+            .finally(() => {
+                console.log("Xong");
+            });
+    }
+    else {
+        addPersonList(person)
+            .then((res) => {
+                console.log("res.data", res.data);
+                // call API lấy lại danh sách người dùng mới sau khi thêm thành công
+                fetchPerson();
+                // Đóng modal sau khi add
+                getEle("#btnDong").click();
+
+            })
+            .catch((err) => {
+                console.log("err: ", err);
+            })
+            // luôn luôn chạy dù thành công, thất bại
+            .finally(() => {
+                console.log("Xong");
+            });
+    }
+
+    resetForm();
 }
 
 
@@ -300,7 +460,7 @@ window.editPerson = (id) => {
 
 
 /**
- * @param {*} addPerson
+ * @param {*} updatePerson
  * Chức năng: cập nhật person
  * Tham số: không
  * Chú ý: 
@@ -334,7 +494,7 @@ const updatePerson = () => {
 
 
 /**
- * @param {*} addPerson
+ * @param {*} arrangePerToOrder
  * Chức năng: Sắp xếp person theo họ tên
  * Tham số: không
  * Chú ý: thêm hàm editFood vào đối tượng window, khi mình ấn edit thì nó sẽ đi tìm trong window có hàm editFood hay ko
@@ -384,7 +544,7 @@ const filterPerson = () => {
                         filterResult.push(value);
                     }
                 })
-                renderTable(filterResult);
+                renderTableByType(filterResult);
             }
         })
         // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
