@@ -18,80 +18,31 @@ const xetLoaiDoiTuong = () => {
     let customerTab2 = getEle("#customerTab2");
     let customerTab3 = getEle("#customerTab3");
 
-    if (loaiDoiTuong === student) {
-        employeeTab1.classList.remove("d-block");
-        employeeTab1.classList.add("d-none");
-        employeeTab2.classList.remove("d-block");
-        employeeTab2.classList.add("d-none");
-        customerTab1.classList.remove("d-block");
-        customerTab1.classList.add("d-none");
-        customerTab2.classList.remove("d-block");
-        customerTab2.classList.add("d-none");
-        customerTab3.classList.remove("d-block");
-        customerTab3.classList.add("d-none");
+    studentTab1.classList.add("d-none");
+    studentTab2.classList.add("d-none");
+    studentTab3.classList.add("d-none");
+    employeeTab1.classList.add("d-none");
+    employeeTab2.classList.add("d-none");
+    customerTab1.classList.add("d-none");
+    customerTab2.classList.add("d-none");
+    customerTab3.classList.add("d-none");
 
+    if (loaiDoiTuong === student) {
         studentTab1.classList.remove("d-none");
-        studentTab1.classList.add("d-block");
         studentTab2.classList.remove("d-none");
-        studentTab2.classList.add("d-block");
         studentTab3.classList.remove("d-none");
-        studentTab3.classList.add("d-block");
     }
     else if (loaiDoiTuong === employee) {
-        studentTab1.classList.remove("d-block");
-        studentTab1.classList.add("d-none");
-        studentTab2.classList.remove("d-block");
-        studentTab2.classList.add("d-none");
-        studentTab3.classList.remove("d-block");
-        studentTab3.classList.add("d-none");
-        customerTab1.classList.remove("d-block");
-        customerTab1.classList.add("d-none");
-        customerTab2.classList.remove("d-block");
-        customerTab2.classList.add("d-none");
-        customerTab3.classList.remove("d-block");
-        customerTab3.classList.add("d-none");
-
         employeeTab1.classList.remove("d-none");
-        employeeTab1.classList.add("d-block");
         employeeTab2.classList.remove("d-none");
-        employeeTab2.classList.add("d-block");
     }
     else if (loaiDoiTuong === customer) {
-        studentTab1.classList.remove("d-block");
-        studentTab1.classList.add("d-none");
-        studentTab2.classList.remove("d-block");
-        studentTab2.classList.add("d-none");
-        studentTab3.classList.remove("d-block");
-        studentTab3.classList.add("d-none");
-        employeeTab1.classList.remove("d-block");
-        employeeTab1.classList.add("d-none");
-        employeeTab2.classList.remove("d-block");
-        employeeTab2.classList.add("d-none");
-
         customerTab1.classList.remove("d-none");
-        customerTab1.classList.add("d-block");
         customerTab2.classList.remove("d-none");
-        customerTab2.classList.add("d-block");
         customerTab3.classList.remove("d-none");
-        customerTab3.classList.add("d-block");
     }
     else {
-        studentTab1.classList.remove("d-block");
-        studentTab1.classList.add("d-none");
-        studentTab2.classList.remove("d-block");
-        studentTab2.classList.add("d-none");
-        studentTab3.classList.remove("d-block");
-        studentTab3.classList.add("d-none");
-        employeeTab1.classList.remove("d-block");
-        employeeTab1.classList.add("d-none");
-        employeeTab2.classList.remove("d-block");
-        employeeTab2.classList.add("d-none");
-        customerTab1.classList.remove("d-block");
-        customerTab1.classList.add("d-none");
-        customerTab2.classList.remove("d-block");
-        customerTab2.classList.add("d-none");
-        customerTab3.classList.remove("d-block");
-        customerTab3.classList.add("d-none");
+        
     }
 }
 
