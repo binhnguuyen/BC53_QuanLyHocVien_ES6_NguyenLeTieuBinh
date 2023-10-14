@@ -539,3 +539,16 @@ const findPersonByName = () => {
             console.log("err", err);
         });
 }
+
+
+/*
+* @param {*} ẩn nút cập nhật khi ấn bút thêm hàm tìm kiếm person theo name
+* Tham số: không
+* Chú ý:
+*/
+getEle("#btnThem").onclick = function() {
+    // ẩn btn cập nhật
+    getEle('#btnCapNhat').style.display = 'none';
+    // hiển btn thêm
+    getEle('#btnThemNV').style.display = 'inline-block';
+}
