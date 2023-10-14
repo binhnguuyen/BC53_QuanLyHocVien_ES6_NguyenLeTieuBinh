@@ -121,6 +121,23 @@
 
 					<!-- Body -->
 					<div class="card-body">
+						<div class="d-flex justify-content-between">
+							<div>
+								<button id="arrangePersonName" class="btn btn-success" onclick="arrangePerToOrder()" >Sắp xếp người dùng theo tên</button>
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
+								</div>
+								<select class="form-control" id="selectPersonType"name="type" onchange="filterPerson()">
+									<option>Chọn đối tượng</option>
+									<option value="Student">Học Sinh</option>
+									<option value="Employee">Giảng viên</option>
+									<option value="Customer">Khách hàng</option>
+								</select>
+							</div>
+						</div>
+						
 						<div class="row mb-3">
 							<div class="col">
 								<div class="input-group">

@@ -91,9 +91,8 @@ const fetchPerson = () => {
     getPersonList()
     // thành công thì in ra sp
     .then(function (res) {
-        // console.log(res.data);
         renderTable(res.data);
-    //   offLoading();
+        //offLoading();
     })
     // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
     .catch(function (err) {
@@ -161,7 +160,7 @@ const getInfo = () => {
 getEle("#btnThemNV").onclick = () =>{
     // lấy thông tin món ăn từ user nhập lên form
     const person = getInfo();
-    console.log('person: ', person);
+    // console.log('person: ', person);
 
     addPersonList(person)
     .then((res) => {
@@ -246,7 +245,7 @@ window.editPerson = (id) => {
 }
 
 // Cập nhật person
-window.updatePerson = () => {
+const updatePerson = () => {
 
     // lấy thông tin person sau khi chỉnh sửa
     const person = getInfo();
@@ -271,6 +270,32 @@ window.updatePerson = () => {
     .finally(() =>{
         console.log("Xong");
     });
+}
+
+const arrangePerToOrder = () => {
+
+    getPersonList()
+    // thành công thì in ra sp
+    .then(function (res) {
+        const person = res.data;
+        const name = [];
+        person.forEach((value, index) => {            
+            name.push(value.namePerson);
+        })
+        const result = person.sort((a, b) => a.namePerson.localeCompare(b.namePerson));
+        renderTable(result);
+
+    })
+    // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
+    .catch(function (err) {
+    //   offLoading();
+      console.log("err", err);
+    })
+    // luôn luôn chạy dù thành công, thất bại
+    .finally(() =>{
+        console.log("Xong");
+    });
+    
 }
 
 // Muốn xài obj thì phải khai new trước

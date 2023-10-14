@@ -3,7 +3,7 @@ const getPersonList = (val) => {
         url: BASE_URL,
         method: "GET",
         // những cặp key-value khai báo bên trong object params sẽ đc gửi lên url theo định dạng
-    // example.com/products?key1=value1&key2=value2
+        // example.com/products?key1=value1&key2=value2
         params: {
         name: val || undefined,
         },
