@@ -3,5 +3,5 @@ function getEle(selector) {
 }
 
 const resetForm = () => {
-    getEle("#modalForm").reset();
+    getEle("#personForm").reset();
 }

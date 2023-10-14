@@ -546,9 +546,20 @@ const findPersonByName = () => {
 * Tham số: không
 * Chú ý:
 */
-getEle("#btnThem").onclick = function() {
+getEle("#btnThem").onclick = () => {
     // ẩn btn cập nhật
     getEle('#btnCapNhat').style.display = 'none';
     // hiển btn thêm
     getEle('#btnThemNV').style.display = 'inline-block';
 }
+
+
+/*
+* @param {*} reset form
+* Tham số: không
+* Chú ý:
+*/
+getEle("#btnReset").onclick = () => {
+    resetForm();
+}
+
