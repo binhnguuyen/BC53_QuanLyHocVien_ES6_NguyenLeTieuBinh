@@ -22,7 +22,8 @@ class Student extends Person {
         this.diemHoa = _hoa;
     }
     tinhDiemTB = () => {
-        return ( Number(this.diemToan) + Number(this.diemLy) + Number(this.diemHoa) ) / 3;
+         const res = ( Number(this.diemToan) + Number(this.diemLy) + Number(this.diemHoa) ) / 3;
+         return res.toFixed(1)
     }
 }
 
