@@ -71,6 +71,12 @@ const updatePersonByID = (id, per) => {
             diemTB: per.tinhDiemTB(),
         }
     }
+    else if ( per.type === "Employee" ) {
+        per = {
+            ...per,
+            tienLuong: per.tinhLuong(),
+        }
+    }
     // nhớ phải có return
     return axios({
         url: `${BASE_URL}/${id}`,
