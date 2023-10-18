@@ -65,11 +65,17 @@ const editPersonByID = (id) => {
 }
 
 const updatePersonByID = (id, per) => {
+    if ( per.type === "Student" ) {
+        per = {
+            ...per,
+            diemTB: per.tinhDiemTB(),
+        }
+    }
     // nhớ phải có return
     return axios({
         url: `${BASE_URL}/${id}`,
         method: "PUT",
-        // phải có data mới up lên đc APi
+        // phải có data mới up lên đc API
         data: per,
     });
 }
