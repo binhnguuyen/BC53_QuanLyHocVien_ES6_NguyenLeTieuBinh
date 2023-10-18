@@ -1,483 +1,657 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý viện nghiên cứu và giảng dạy</title>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Quản lý viện nghiên cứu và giảng dạy</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Boostrap 4.6 -->
+  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+  integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
 
-	<!-- Bootstrap 4 -->
-	<link rel="stylesheet" href="./../asset/css/bootstrap.min.css">
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="./../asset/css/jquery-ui.min.css" />
 
-	<!-- JQuery UI -->
-	<link rel="stylesheet" href="./../asset/css/jquery-ui.min.css">
+    <!-- Animate -->
+    <!-- <link rel="stylesheet" href="css/animate.css"> -->
 
-	<!-- Animate -->
-	<!-- <link rel="stylesheet" href="css/animate.css"> -->
+    <!-- My CSS -->
+    <link rel="stylesheet" href="./../asset/css/modal.css" />
 
-	<!-- My CSS -->
-	<link rel="stylesheet" href="./../asset/css/modal.css">
+    <link rel="stylesheet" href="./../asset/css/style4.css" />
 
-	<link rel="stylesheet" href="./../asset/css/style4.css">
+    <link rel="stylesheet" type="text/css" href="./../asset/css/main.css" />
+  </head>
 
-	<link rel="stylesheet" type="text/css" href="./../asset/css/main.css">
-</head>
+  <body>
+    <!-- Spinner -->
+    <div id="spinner">
+      <div class="spinner-grow text-success" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
 
-<body>
+    <div class="wrapper">
+      <!-- Sidebar Holder -->
+      <nav id="sidebar">
+        <div class="sidebar-header">
+          <h3>Bootstrap Sidebar</h3>
+          <strong>BS</strong>
+        </div>
 
-	<div class="wrapper">
-		<!-- Sidebar Holder -->
-		<nav id="sidebar">
-			<div class="sidebar-header">
-				<h3>Bootstrap Sidebar</h3>
-				<strong>BS</strong>
-			</div>
+        <ul class="list-unstyled components">
+          <li class="active">
+            <a href="#homeSubmenu">
+              <i class="fa fa-home"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-briefcase"></i>
+              About
+            </a>
+            <a href="#pageSubmenu">
+              <i class="fa fa-files-o"></i>
+              Pages
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-link"></i>
+              Portfolio
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-paperclip"></i>
+              FAQ
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-paper-plane"></i>
+              Contact
+            </a>
+          </li>
+        </ul>
 
-			<ul class="list-unstyled components">
-				<li class="active">
-					<a href="#homeSubmenu">
-						<i class="fa fa-home"></i>
-						Home
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-briefcase"></i>
-						About
-					</a>
-					<a href="#pageSubmenu">
-						<i class="fa fa-files-o"></i>
-						Pages
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-link"></i>
-						Portfolio
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-paperclip"></i>
-						FAQ
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-paper-plane"></i>
-						Contact
-					</a>
-				</li>
-			</ul>
+        <ul class="list-unstyled CTAs">
+          <li>
+            <a
+              href="https://bootstrapious.com/tutorial/files/sidebar.zip"
+              class="download"
+              >Download source</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://bootstrapious.com/p/bootstrap-sidebar"
+              class="article"
+              >Back to article</a
+            >
+          </li>
+        </ul>
+      </nav>
 
-			<ul class="list-unstyled CTAs">
-				<li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-				</li>
-				<li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
-			</ul>
-		</nav>
+      <!-- Page Content Holder -->
+      <div id="content">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button
+                type="button"
+                id="sidebarCollapse"
+                class="btn btn-info navbar-btn"
+              >
+                <i class="glyphicon glyphicon-align-left"></i>
+                <span>Toggle Sidebar</span>
+              </button>
+            </div>
 
-		<!-- Page Content Holder -->
-		<div id="content">
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
+            <div
+              class="collapse navbar-collapse"
+              id="bs-example-navbar-collapse-1"
+            >
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Page</a></li>
+                <li><a href="#">Page</a></li>
+                <li><a href="#">Page</a></li>
+                <li><a href="#">Page</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
 
-					<div class="navbar-header">
-						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-							<i class="glyphicon glyphicon-align-left"></i>
-							<span>Toggle Sidebar</span>
-						</button>
-					</div>
+        <div class="container">
+          <div class="card text-center">
+            <!-- Header -->
+            <div class="card-header myCardHeader">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="text-left text-primary font-weight-bold">
+                    Danh sách nhân viên
+                  </h3>
+                </div>
+                <div class="col-md-6 text-right">
+                  <button
+                    class="btn btn-primary"
+                    id="btnThem"
+                    data-toggle="modal"
+                    data-target="#myModal"
+                  >
+                    Thêm người dùng
+                  </button>
+                </div>
+              </div>
+            </div>
 
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#">Page</a></li>
-							<li><a href="#">Page</a></li>
-							<li><a href="#">Page</a></li>
-							<li><a href="#">Page</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+            <!-- Body -->
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <button
+                    id="arrangePersonName"
+                    class="btn btn-success"
+                    onclick="arrangePerToOrder()"
+                  >
+                    Sắp xếp người dùng theo tên
+                  </button>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-briefcase"></i
+                    ></span>
+                  </div>
+                  <select
+                    class="form-control"
+                    id="selectPersonType"
+                    name="type"
+                    onchange="filterPerson()"
+                  >
+                    <option value="All">Chọn đối tượng</option>
+                    <option value="Student">Học Sinh</option>
+                    <option value="Employee">Giảng viên</option>
+                    <option value="Customer">Khách hàng</option>
+                  </select>
+                </div>
+              </div>
 
-
-			<div class="container">
-				<div class="card text-center">
-					<!-- Header -->
-					<div class="card-header myCardHeader">
-						<div class="row">
-							<div class="col-md-6">
-								<h3 class="text-left text-primary font-weight-bold">Danh sách nhân viên</h3>
-							</div>
-							<div class="col-md-6 text-right">
-								<button class="btn btn-primary" id="btnThem" data-toggle="modal"
-									data-target="#myModal">Thêm người dùng</button>
-							</div>
-						</div>
-					</div>
-
-					<!-- Body -->
-					<div class="card-body">
-						<div class="d-flex justify-content-between">
-							<div>
-								<button id="arrangePersonName" class="btn btn-success" onclick="arrangePerToOrder()" >Sắp xếp người dùng theo tên</button>
-							</div>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
-								</div>
-								<select class="form-control" id="selectPersonType"name="type" onchange="filterPerson()">
-									<option value="All">Chọn đối tượng</option>
-									<option value="Student">Học Sinh</option>
-									<option value="Employee">Giảng viên</option>
-									<option value="Customer">Khách hàng</option>
-								</select>
-							</div>
-						</div>
-						
-						<div class="row mb-3">
-							<div class="col">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Loại nhân viên" id="searchName">
-									<div class="input-group-prepend">
-										<button onclick="findPersonByName()" id="btnTimNV" class="btn btn-primary"><i class="fa fa-search"></i></button>
-										<!-- <span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i></span> -->
-									</div>
-								</div>
-								<div class="output-group">
-									<span class="sp-thongbao" id="tbLoaiNV"></span>
-									<table id="tableKetQuaTimKiemHead" class="table table-bordered table-hover myTable d-none">
-										<thead class="text-primary">
-											<tr>
-												<th class="nowrap">
-													<span class="mr-1">Tài khoản</span>
-													<i class="fa fa-arrow-up" id="SapXepTang"></i>
-													<i class="fa fa-arrow-down" id="SapXepGiam"></i>
-												</th>
-												<th>Họ và tên</th>
-												<th>Email</th>
-												<th>Ngày làm</th>
-												<th>Chức vụ</th>									
-												<th>Tổng lương</th>
-												<th>Xếp loại</th>
-												<th><em class="fa fa-cog"></em></th>
-											</tr>
-										</thead>
-										<tbody id="tableKetQuaTimKiemBody">
-
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div class="sp-thongbao text-danger d-none text-danger" id="tbFilterPerson">
-							Không tìm thấy
-						</div>
-						<table class="table table-bordered table-hover myTable">
-							<thead class="text-primary">
-								<tr>
-									<!-- <th class="nowrap">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Loại nhân viên"
+                      id="searchName"
+                    />
+                    <div class="input-group-prepend">
+                      <button
+                        onclick="findPersonByName()"
+                        id="btnTimNV"
+                        class="btn btn-primary"
+                      >
+                        <i class="fa fa-search"></i>
+                      </button>
+                      <!-- <span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i></span> -->
+                    </div>
+                  </div>
+                  <div class="output-group">
+                    <span class="sp-thongbao" id="tbLoaiNV"></span>
+                    <table
+                      id="tableKetQuaTimKiemHead"
+                      class="table table-bordered table-hover myTable d-none"
+                    >
+                      <thead class="text-primary">
+                        <tr>
+                          <th class="nowrap">
+                            <span class="mr-1">Tài khoản</span>
+                            <i class="fa fa-arrow-up" id="SapXepTang"></i>
+                            <i class="fa fa-arrow-down" id="SapXepGiam"></i>
+                          </th>
+                          <th>Họ và tên</th>
+                          <th>Email</th>
+                          <th>Ngày làm</th>
+                          <th>Chức vụ</th>
+                          <th>Tổng lương</th>
+                          <th>Xếp loại</th>
+                          <th><em class="fa fa-cog"></em></th>
+                        </tr>
+                      </thead>
+                      <tbody id="tableKetQuaTimKiemBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="sp-thongbao text-danger d-none text-danger"
+                id="tbFilterPerson"
+              >
+                Không tìm thấy
+              </div>
+              <table class="table table-bordered table-hover myTable">
+                <thead class="text-primary">
+                  <tr>
+                    <!-- <th class="nowrap">
 										<span class="mr-1">Mã</span>
 										<i class="fa fa-arrow-up" id="SapXepTang"></i>
 										<i class="fa fa-arrow-down" id="SapXepGiam"></i>
 									</th> -->
-									<th>Mã</th>
-									<th>Họ và tên</th>
-									<th>Địa chỉ</th>
-									<th>Email</th>
-									<th>Loại người dùng</th>
-									<th id="trDiemToan">Điểm toán</th>
-									<th id="trDiemLy">Điểm lý</th>
-									<th id="trDiemHoa">Điểm hoá</th>
-									<th id="trDiemTB">Điểm trung bình</th>
-									<th id="trDay">Số ngày làm</th>
-									<th id="trSalaryForDay">Lương ngày</th>
-									<th id="trSalary">Tổng lương</th>
-									<th id="trCongTy">Công ty</th>
-									<th id="trHoaDon">Hoá đơn</th>
-									<th id="trDanhGia">Đánh giá</th>
-									<th><em class="fa fa-cog"></em></th>
-								</tr>
-							</thead>
-							<tbody id="tableDanhSach">
+                    <th>Mã</th>
+                    <th>Họ và tên</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Loại người dùng</th>
+                    <th id="trDiemToan">Điểm toán</th>
+                    <th id="trDiemLy">Điểm lý</th>
+                    <th id="trDiemHoa">Điểm hoá</th>
+                    <th id="trDiemTB">Điểm trung bình</th>
+                    <th id="trDay">Số ngày làm</th>
+                    <th id="trSalaryForDay">Lương ngày</th>
+                    <th id="trSalary">Tổng lương</th>
+                    <th id="trCongTy">Công ty</th>
+                    <th id="trHoaDon">Hoá đơn</th>
+                    <th id="trDanhGia">Đánh giá</th>
+                    <th><em class="fa fa-cog"></em></th>
+                  </tr>
+                </thead>
+                <tbody id="tableDanhSach"></tbody>
+              </table>
+            </div>
 
-							</tbody>
-						</table>
-					</div>
+            <!-- Footer -->
+            <div class="card-footer myCardFooter">
+              <nav>
+                <ul
+                  class="pagination justify-content-center"
+                  id="ulPhanTrang"
+                ></ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-					<!-- Footer -->
-					<div class="card-footer myCardFooter">
-						<nav>
-							<ul class="pagination justify-content-center" id="ulPhanTrang">
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <header class="head-form mb-0">
+            <h2 id="header-title">Log In</h2>
+          </header>
 
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-
-	<!-- The Modal -->
-	<div class="modal fade" id="myModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<header class="head-form mb-0">
-					<h2 id="header-title">Log In</h2>
-				</header>
-
-				<!-- Modal Header -->
-				<!-- 	<div class="modal-header">
+          <!-- Modal Header -->
+          <!-- 	<div class="modal-header">
 					<h4 class="modal-title" id="modal-title">Modal Heading</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div> -->
 
-				<!-- Modal body -->
-				<div class="modal-body">
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form role="form" id="personForm">
+              <!-- Chọn loại người dùng -->
+              <div class="form-group">
+                <label>Đối tượng</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-briefcase"></i
+                    ></span>
+                  </div>
+                  <select
+                    class="form-control"
+                    id="personType"
+                    name="type"
+                    onchange="xetLoaiDoiTuong()"
+                  >
+                    <option>Chọn đối tượng</option>
+                    <option value="Student">Học Sinh</option>
+                    <option value="Employee">Giảng viên</option>
+                    <option value="Customer">Khách hàng</option>
+                  </select>
+                </div>
 
-					<form role="form" id="personForm">
-						<!-- Chọn loại người dùng -->
-						<div class="form-group">
-							<label>Đối tượng</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
-								</div>
-								<select class="form-control" id="personType" name="type" onchange="xetLoaiDoiTuong()">
-									<option>Chọn đối tượng</option>
-									<option value="Student">Học Sinh</option>
-									<option value="Employee">Giảng viên</option>
-									<option value="Customer">Khách hàng</option>
-								</select>
-							</div>
+                <span class="sp-thongbao" id="tbType"></span>
+              </div>
 
-							<span class="sp-thongbao" id="tbType"></span>
-						</div>
+              <!-- Mã người dùng -->
+              <div class="form-group">
+                <label>Mã người dùng</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-id-card"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    name="id"
+                    id="personID"
+                    class="form-control input-sm"
+                    placeholder="Mã người dùng"
+                  />
+                </div>
 
-						<!-- Mã người dùng -->
-						<div class="form-group">
-							<label>Mã người dùng</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-id-card"></i></span>
-								</div>
-								<input type="text" name="id" id="personID" class="form-control input-sm"
-									placeholder="Mã người dùng">
-							</div>
+                <span class="sp-thongbao" id="tbID"></span>
+              </div>
 
-							<span class="sp-thongbao" id="tbID"></span>
-						</div>
+              <!-- Tên người dùng -->
+              <div class="form-group">
+                <label>Họ và tên</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-user"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="name"
+                    name="namePerson"
+                    id="personName"
+                    class="form-control input-sm"
+                    placeholder="Họ và tên"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbName"></span>
+              </div>
 
-						<!-- Tên người dùng -->
-						<div class="form-group">
-							<label>Họ và tên</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-user"></i></span>
-								</div>
-								<input type="name" name="namePerson" id="personName" class="form-control input-sm"
-									placeholder="Họ và tên">
-							</div>
-							<span class="sp-thongbao" id="tbName"></span>
-						</div>
+              <!-- Địa chỉ người dùng -->
+              <div class="form-group">
+                <label>Địa chỉ</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-address-book"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    name="address"
+                    id="personAddress"
+                    class="form-control input-sm"
+                    placeholder="Địa chỉ"
+                  />
+                </div>
 
-						<!-- Địa chỉ người dùng -->
-						<div class="form-group">
-							<label>Địa chỉ</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-address-book"></i></span>
-								</div>
-								<input type="text" name="address" id="personAddress" class="form-control input-sm"
-									placeholder="Địa chỉ">
-							</div>
+                <span class="sp-thongbao" id="tbAddress"></span>
+              </div>
 
-							<span class="sp-thongbao" id="tbAddress"></span>
-						</div>
+              <!-- Email người dùng -->
+              <div class="form-group">
+                <label>Email</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-envelope"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    id="personEmail"
+                    class="form-control input-sm"
+                    placeholder="Email"
+                  />
+                </div>
 
-						<!-- Email người dùng -->
-						<div class="form-group">
-							<label>Email</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-envelope"></i></span>
-								</div>
-								<input type="email" name="email" id="personEmail" class="form-control input-sm"
-									placeholder="Email">
-							</div>
+                <span class="sp-thongbao" id="tbEmail"></span>
+              </div>
 
-							<span class="sp-thongbao" id="tbEmail"></span>
-						</div>
+              <!-- Điểm toán người dùng -->
+              <div id="studentTab1" class="form-group d-none">
+                <label>Điểm toán</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-book"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="number"
+                    name="diemToan"
+                    id="studentDiemToan"
+                    class="form-control input-sm"
+                    placeholder="Điểm toán"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbDiemToan"></span>
+              </div>
 
-						<!-- Điểm toán người dùng -->
-						<div id="studentTab1" class="form-group d-none">
-							<label>Điểm toán</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-book"></i></span>
-								</div>
-								<input type="number" name="diemToan" id="studentDiemToan" class="form-control input-sm"
-									placeholder="Điểm toán">
-							</div>
-							<span class="sp-thongbao" id="tbDiemToan"></span>
-						</div>
+              <!-- Điểm lý người dùng -->
+              <div id="studentTab2" class="form-group d-none">
+                <label>Điểm lý</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-book"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="number"
+                    name="diemLy"
+                    id="studentDiemLy"
+                    class="form-control input-sm"
+                    placeholder="Điểm lý"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbDiemLy"></span>
+              </div>
 
-						<!-- Điểm lý người dùng -->
-						<div id="studentTab2" class="form-group d-none">
-							<label>Điểm lý</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-book"></i></span>
-								</div>
-								<input type="number" name="diemLy" id="studentDiemLy" class="form-control input-sm"
-									placeholder="Điểm lý">
-							</div>
-							<span class="sp-thongbao" id="tbDiemLy"></span>
-						</div>
-						
-						<!-- Điểm hoá người dùng -->
-						<div id="studentTab3" class="form-group d-none">
-							<label>Điểm hoá</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-book"></i></span>
-								</div>
-								<input type="number" name="diemHoa" id="studentDiemHoa" class="form-control input-sm"
-									placeholder="Điểm hoá">
-							</div>
-							<span class="sp-thongbao" id="tbDiemHoa"></span>
-						</div>
+              <!-- Điểm hoá người dùng -->
+              <div id="studentTab3" class="form-group d-none">
+                <label>Điểm hoá</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-book"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="number"
+                    name="diemHoa"
+                    id="studentDiemHoa"
+                    class="form-control input-sm"
+                    placeholder="Điểm hoá"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbDiemHoa"></span>
+              </div>
 
-						<!-- Số ngày làm -->
-						<div id="employeeTab1" class="form-group d-none">
-							<label>Số ngày làm</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-								</div>
-								<input type="number" name="day" id="employeeDay" class="form-control input-sm"
-									placeholder="Số ngày làm">
-							</div>
-							<span class="sp-thongbao" id="tbNgayLam"></span>
-						</div>
+              <!-- Số ngày làm -->
+              <div id="employeeTab1" class="form-group d-none">
+                <label>Số ngày làm</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-clock-o" aria-hidden="true"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="number"
+                    name="day"
+                    id="employeeDay"
+                    class="form-control input-sm"
+                    placeholder="Số ngày làm"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbNgayLam"></span>
+              </div>
 
-						<!-- Lương theo ngày -->
-						<div id="employeeTab2" class="form-group d-none">
-							<label>Lương theo ngày</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-credit-card"></i></span>
-								</div>
-								<input type="number" name="salary" id="employeeSalary" class="form-control input-sm"
-									placeholder="Lương theo ngày">
-							</div>
-							<span class="sp-thongbao" id="tbSalary"></span>
-						</div>
+              <!-- Lương theo ngày -->
+              <div id="employeeTab2" class="form-group d-none">
+                <label>Lương theo ngày</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-credit-card"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="number"
+                    name="salary"
+                    id="employeeSalary"
+                    class="form-control input-sm"
+                    placeholder="Lương theo ngày"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbSalary"></span>
+              </div>
 
-						<!-- Công ty -->
-						<div id="customerTab1" class="form-group d-none">
-							<label>Công ty</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
-								</div>
-								<input type="text" name="congTy" id="customerCongTy" class="form-control input-sm"
-									placeholder="Tên công ty">
-							</div>
-							<span class="sp-thongbao" id="tbCongTy"></span>
-						</div>
+              <!-- Công ty -->
+              <div id="customerTab1" class="form-group d-none">
+                <label>Công ty</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-briefcase" aria-hidden="true"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    name="congTy"
+                    id="customerCongTy"
+                    class="form-control input-sm"
+                    placeholder="Tên công ty"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbCongTy"></span>
+              </div>
 
-						<!-- Trị giá hoá đơn -->
-						<div id="customerTab2" class="form-group d-none">
-							<label>Hoá đơn</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-credit-card"></i></span>
-								</div>
-								<input type="number" name="hoaDon" id="customerHoaDon" class="form-control input-sm"
-									placeholder="Trị giá hoá đơn">
-							</div>
-							<span class="sp-thongbao" id="tbHoaDon"></span>
-						</div>
+              <!-- Trị giá hoá đơn -->
+              <div id="customerTab2" class="form-group d-none">
+                <label>Hoá đơn</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-credit-card"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="number"
+                    name="hoaDon"
+                    id="customerHoaDon"
+                    class="form-control input-sm"
+                    placeholder="Trị giá hoá đơn"
+                  />
+                </div>
+                <span class="sp-thongbao" id="tbHoaDon"></span>
+              </div>
 
-						<!-- Đánh giá -->
-						<div id="customerTab3" class="form-group d-none">
-							<label>Đánh giá</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-star"></i></span>
-								</div>
-								<select class="form-control" name="danhGia" id="customerDanhGia">
-									<option>Chọn đánh giá</option>
-									<option value="Excellent">Xuất sắc</option>
-									<option value="Good">Tốt</option>
-									<option value="Normal">Khá</option>
-								</select>
-							</div>
+              <!-- Đánh giá -->
+              <div id="customerTab3" class="form-group d-none">
+                <label>Đánh giá</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-star"></i
+                    ></span>
+                  </div>
+                  <select
+                    class="form-control"
+                    name="danhGia"
+                    id="customerDanhGia"
+                  >
+                    <option>Chọn đánh giá</option>
+                    <option value="Excellent">Xuất sắc</option>
+                    <option value="Good">Tốt</option>
+                    <option value="Normal">Khá</option>
+                  </select>
+                </div>
 
-							<span class="sp-thongbao" id="tbDanhGia"></span>
-						</div>
+                <span class="sp-thongbao" id="tbDanhGia"></span>
+              </div>
+            </form>
+          </div>
 
-					</form>
-				</div>
+          <!-- Modal footer -->
+          <div class="modal-footer" id="modal-footer">
+            <button
+              onclick="addPerson()"
+              id="btnThemNV"
+              type="button"
+              class="btn btn-success"
+            >
+              Thêm người dùng
+            </button>
+            <button
+              id="btnCapNhat"
+              onclick="updatePerson()"
+              type="button"
+              class="btn btn-success"
+            >
+              Cập nhật
+            </button>
+            <button id="btnReset" type="button" class="btn btn-warning">
+              Reset
+            </button>
+            <button
+              id="btnDong"
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-				<!-- Modal footer -->
-				<div class="modal-footer" id="modal-footer">
-					<button onclick="addPerson()" id="btnThemNV" type="button" class="btn btn-success">Thêm người dùng</button>
-					<button id="btnCapNhat" onclick="updatePerson()" type="button" class="btn btn-success">Cập nhật</button>
-					<button id="btnReset" type="button" class="btn btn-warning">Reset</button>
-					<button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-				</div>
+    <!-- Bootstrap -->
+    <script src="./../app/jquery.min.js"></script>
+    <script type="text/javascript" src="./../app/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="./../app/popper.min.js"></script>
+    <script type="text/javascript" src="./../app/bootstrap.min.js"></script>
 
-			</div>
-		</div>
-	</div>
+    <!-- Date Picker -->
+    <!-- <script src="js/jquery-ui.min.js"></script> -->
+    <script src="./../app/jquery-ui.js"></script>
+    <script src="./../app/datepicker.js"></script>
 
-	<!-- Bootstrap -->
-	<script src="./../app/jquery.min.js"></script>
-	<script type="text/javascript" src="./../app/jquery.easing.min.js"></script>
-	<script type="text/javascript" src="./../app/popper.min.js"></script>
-	<script type="text/javascript" src="./../app/bootstrap.min.js"></script>
-
-	<!-- Date Picker -->
-	<!-- <script src="js/jquery-ui.min.js"></script> -->
-	<script src="./../app/jquery-ui.js"></script>
-	<script src="./../app/datepicker.js"></script>
-
-	<!-- Wow -->
-	<!-- <script src="js/wow.min.js"></script>	
+    <!-- Wow -->
+    <!-- <script src="js/wow.min.js"></script>	
 	<script>
 		new WOW().init();
 	</script>  -->
 
-	<!-- <script src="js/modal.js"></script> -->
+    <!-- <script src="js/modal.js"></script> -->
 
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#sidebarCollapse").on("click", function () {
+          $("#sidebar").toggleClass("active");
+        });
+      });
+    </script>
 
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#sidebarCollapse').on('click', function () {
-				$('#sidebar').toggleClass('active');
-			});
-		});
-	</script>
-
-	<!-- thư viện Axios -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+    <!-- thư viện Axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
       integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-	<!-- nhớ phải cho obj trong model gán trước controller -->
-	<script src="./../app/models/Person.js"></script>
-	<script src="./../app/models/ListPerson.js"></script>
-	<script src="./../app/utility/validation.js"></script>
-	<script src="./../app/controllers/controller.js"></script>
-	<script src="./../app/controllers/index.js"></script>
-</body>
-
+    <!-- nhớ phải cho obj trong model gán trước controller -->
+    <script src="./../app/models/Person.js"></script>
+    <script src="./../app/models/ListPerson.js"></script>
+    <script src="./../app/utility/validation.js"></script>
+    <script src="./../app/controllers/controller.js"></script>
+    <script src="./../app/controllers/index.js"></script>
+  </body>
 </html>

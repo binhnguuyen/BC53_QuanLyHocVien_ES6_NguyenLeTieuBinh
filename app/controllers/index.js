@@ -56,16 +56,16 @@ const xetLoaiDoiTuong = () => {
  * Chú ý:
  */
 const fetchPerson = () => {
-
+    onLoading();
     getPersonList()
         // thành công thì in ra sp
         .then(function (res) {
             renderTable(res.data);
-            //offLoading();
+            offLoading();
         })
         // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
         .catch(function (err) {
-            //   offLoading();
+            offLoading();
             console.log("err", err);
         })
         // luôn luôn chạy dù thành công, thất bại
@@ -461,7 +461,6 @@ const arrangePerToOrder = () => {
         })
         // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
         .catch(function (err) {
-            //   offLoading();
             console.log("err", err);
         })
         // luôn luôn chạy dù thành công, thất bại
@@ -500,7 +499,6 @@ const filterPerson = () => {
         })
         // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
         .catch(function (err) {
-            // offLoading();
             console.log("err", err);
         });
 }
