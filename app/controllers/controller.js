@@ -1,4 +1,4 @@
-function getEle(selector) {
+const getEle = (selector) => {
     return document.querySelector(selector);
 }
 
@@ -7,10 +7,10 @@ const resetForm = () => {
 }
 
 // Tạo 2 hàm lúc loading khi đang khi request cho backend
-function onLoading() {
+const onLoading = () => {
     document.querySelector("#spinner").style.display = "flex";
 }
 
-function offLoading() {
+const offLoading = () => {
     document.querySelector("#spinner").style.display = "none";
 }
