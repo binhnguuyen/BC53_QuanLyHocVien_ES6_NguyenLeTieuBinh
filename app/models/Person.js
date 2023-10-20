@@ -21,6 +21,10 @@ class Student extends Person {
         this.diemLy = _ly;
         this.diemHoa = _hoa;
     }
+    tinhDiemTB = () => {
+         const res = ( Number(this.diemToan) + Number(this.diemLy) + Number(this.diemHoa) ) / 3;
+         return res.toFixed(1)
+    }
 }
 
 class Employee extends Person {
@@ -29,6 +33,9 @@ class Employee extends Person {
         this.day = _day;
         this.salary = _salary;
 
+    }
+    tinhLuong = () => {
+        return Number(this.day) * Number(this.salary);
     }
 }
 

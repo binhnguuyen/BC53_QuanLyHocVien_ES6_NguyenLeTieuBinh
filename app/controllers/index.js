@@ -1,5 +1,14 @@
+/**
+ * @param {*} xetLoaiDoiTuong
+ * Chức năng: xét đối tượng để hiện ra ô input cho phù hợp
+ * Tham số: không
+ * Chú ý:
+ */
+const student = "Student";
+const employee = "Employee";
+const customer = "Customer";
 const xetLoaiDoiTuong = () => {
-    let loaiDoiTuong = getEle("#loaiNguoiDung").value;
+    let loaiDoiTuong = getEle("#personType").value;
     let studentTab1 = getEle("#studentTab1");
     let studentTab2 = getEle("#studentTab2");
     let studentTab3 = getEle("#studentTab3");
@@ -9,105 +18,94 @@ const xetLoaiDoiTuong = () => {
     let customerTab2 = getEle("#customerTab2");
     let customerTab3 = getEle("#customerTab3");
 
-    if ( loaiDoiTuong === "Student" ) {
-        employeeTab1.classList.remove("d-block");
-        employeeTab1.classList.add("d-none");
-        employeeTab2.classList.remove("d-block");
-        employeeTab2.classList.add("d-none");
-        customerTab1.classList.remove("d-block");
-        customerTab1.classList.add("d-none");
-        customerTab2.classList.remove("d-block");
-        customerTab2.classList.add("d-none");
-        customerTab3.classList.remove("d-block");
-        customerTab3.classList.add("d-none");
+    studentTab1.classList.add("d-none");
+    studentTab2.classList.add("d-none");
+    studentTab3.classList.add("d-none");
+    employeeTab1.classList.add("d-none");
+    employeeTab2.classList.add("d-none");
+    customerTab1.classList.add("d-none");
+    customerTab2.classList.add("d-none");
+    customerTab3.classList.add("d-none");
 
+    if (loaiDoiTuong === student) {
         studentTab1.classList.remove("d-none");
-        studentTab1.classList.add("d-block");
         studentTab2.classList.remove("d-none");
-        studentTab2.classList.add("d-block");
         studentTab3.classList.remove("d-none");
-        studentTab3.classList.add("d-block");
     }
-    else if ( loaiDoiTuong === "Employee" ) {
-        studentTab1.classList.remove("d-block");
-        studentTab1.classList.add("d-none");
-        studentTab2.classList.remove("d-block");
-        studentTab2.classList.add("d-none");
-        studentTab3.classList.remove("d-block");
-        studentTab3.classList.add("d-none");
-        customerTab1.classList.remove("d-block");
-        customerTab1.classList.add("d-none");
-        customerTab2.classList.remove("d-block");
-        customerTab2.classList.add("d-none");
-        customerTab3.classList.remove("d-block");
-        customerTab3.classList.add("d-none");
-
+    else if (loaiDoiTuong === employee) {
         employeeTab1.classList.remove("d-none");
-        employeeTab1.classList.add("d-block");
         employeeTab2.classList.remove("d-none");
-        employeeTab2.classList.add("d-block");
     }
-    else if ( loaiDoiTuong === "Customer" ) {
-        studentTab1.classList.remove("d-block");
-        studentTab1.classList.add("d-none");
-        studentTab2.classList.remove("d-block");
-        studentTab2.classList.add("d-none");
-        studentTab3.classList.remove("d-block");
-        studentTab3.classList.add("d-none");
-        employeeTab1.classList.remove("d-block");
-        employeeTab1.classList.add("d-none");
-        employeeTab2.classList.remove("d-block");
-        employeeTab2.classList.add("d-none");
-
+    else if (loaiDoiTuong === customer) {
         customerTab1.classList.remove("d-none");
-        customerTab1.classList.add("d-block");
         customerTab2.classList.remove("d-none");
-        customerTab2.classList.add("d-block");
         customerTab3.classList.remove("d-none");
-        customerTab3.classList.add("d-block");
     }
     else {
-        studentTab1.classList.remove("d-block");
-        studentTab1.classList.add("d-none");
-        studentTab2.classList.remove("d-block");
-        studentTab2.classList.add("d-none");
-        studentTab3.classList.remove("d-block");
-        studentTab3.classList.add("d-none");
-        employeeTab1.classList.remove("d-block");
-        employeeTab1.classList.add("d-none");
-        employeeTab2.classList.remove("d-block");
-        employeeTab2.classList.add("d-none");
-        customerTab1.classList.remove("d-block");
-        customerTab1.classList.add("d-none");
-        customerTab2.classList.remove("d-block");
-        customerTab2.classList.add("d-none");
-        customerTab3.classList.remove("d-block");
-        customerTab3.classList.add("d-none");
+        
     }
 }
 
+
+
+
+/**
+ * @param {*} fetchPerson
+ * Chức năng: fetch dữ liệu từ API về
+ * Tham số: không
+ * Chú ý:
+ */
 const fetchPerson = () => {
-    
+    onLoading();
     getPersonList()
-    // thành công thì in ra sp
-    .then(function (res) {
-        // console.log(res.data);
-        renderTable(res.data);
-    //   offLoading();
-    })
-    // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
-    .catch(function (err) {
-    //   offLoading();
-      console.log("err", err);
-    })
-    // luôn luôn chạy dù thành công, thất bại
-    .finally(() =>{
-        console.log("Xong");
-    });
+        // thành công thì in ra sp
+        .then(function (res) {
+            renderTable(res.data);
+            offLoading();
+        })
+        // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
+        .catch(function (err) {
+            offLoading();
+            console.log("err", err);
+        })
+        // luôn luôn chạy dù thành công, thất bại
+        .finally(() => {
+            console.log("Xong");
+        });
 }
 fetchPerson();
 
-const renderTable = (list) =>{
+
+/**
+ * @param {*} renderTable
+ * Chức năng: render dữ liệu ra giao diện
+ * Tham số: không
+ * Chú ý:
+ */
+let trDiemToan = getEle("#trDiemToan");
+let trDiemLy = getEle("#trDiemLy");
+let trDiemHoa = getEle("#trDiemHoa");
+let trDiemTB = getEle("#trDiemTB");
+let trDay = getEle("#trDay");
+let trSalaryForDay = getEle("#trSalaryForDay");
+let trSalary = getEle("#trSalary");
+let trCongTy = getEle("#trCongTy");
+let trHoaDon = getEle("#trHoaDon");
+let trDanhGia = getEle("#trDanhGia");
+
+const renderTable = (list) => {
+
+    trDiemToan.classList.add("d-none");
+    trDiemLy.classList.add("d-none");
+    trDiemHoa.classList.add("d-none");
+    trDiemTB.classList.add("d-none");
+    trDay.classList.add("d-none");
+    trSalaryForDay.classList.add("d-none");
+    trSalary.classList.add("d-none");
+    trCongTy.classList.add("d-none");
+    trHoaDon.classList.add("d-none");
+    trDanhGia.classList.add("d-none");
+
     let htmlContent = "";
     list.forEach((value) => {
         htmlContent += `
@@ -118,8 +116,8 @@ const renderTable = (list) =>{
                 <td>${value.email}</td>
                 <td>${value.type}</td>
                 <td>
-                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="editFood(${value.id})">Edit</button>
-                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deleteFood(${value.id})">Delete</button>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
                 </td>
             </tr>
         `
@@ -127,427 +125,439 @@ const renderTable = (list) =>{
     getEle('#tableDanhSach').innerHTML = htmlContent;
 }
 
-const getInfo = () => {
 
+/**
+ * @param {*} renderTableByType
+ * Chức năng: render dữ liệu ra giao diện
+ * Tham số: không
+ * Chú ý:
+ */
+const renderTableByType = (list) => {
+
+    trDiemToan.classList.add("d-none");
+    trDiemLy.classList.add("d-none");
+    trDiemHoa.classList.add("d-none");
+    trDiemTB.classList.add("d-none");
+    trDay.classList.add("d-none");
+    trSalaryForDay.classList.add("d-none");
+    trSalary.classList.add("d-none");
+    trCongTy.classList.add("d-none");
+    trHoaDon.classList.add("d-none");
+    trDanhGia.classList.add("d-none");
+    let htmlContent = "";
+
+    list.forEach((value) => {
+        if (value.type === student) {
+            trDiemToan.classList.remove("d-none");
+            trDiemLy.classList.remove("d-none");
+            trDiemHoa.classList.remove("d-none");
+            trDiemTB.classList.remove("d-none");
+            htmlContent += `
+            <tr>
+                <td>${value.id}</td>
+                <td>${value.namePerson}</td>
+                <td>${value.address}</td>
+                <td>${value.email}</td>
+                <td>${value.type}</td>
+                <td>${value.diemToan}</td>
+                <td>${value.diemLy}</td>
+                <td>${value.diemHoa}</td>
+                <td>${value.diemTB}</td>
+                <td>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
+                </td>
+            </tr>
+            `
+        }
+        else if (value.type === employee) {
+            trDay.classList.remove("d-none");
+            trSalaryForDay.classList.remove("d-none");
+            trSalary.classList.remove("d-none");
+            htmlContent += `
+            <tr>
+                <td>${value.id}</td>
+                <td>${value.namePerson}</td>
+                <td>${value.address}</td>
+                <td>${value.email}</td>
+                <td>${value.type}</td>
+                <td>${value.day}</td>
+                <td>${value.salary}</td>
+                <td>${value.tienLuong}</td>
+                <td>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
+                </td>
+            </tr>
+            `
+        }
+        else if (value.type === customer) {
+            trCongTy.classList.remove("d-none");
+            trHoaDon.classList.remove("d-none");
+            trDanhGia.classList.remove("d-none");
+            htmlContent += `
+            <tr>
+                <td>${value.id}</td>
+                <td>${value.namePerson}</td>
+                <td>${value.address}</td>
+                <td>${value.email}</td>
+                <td>${value.type}</td>
+                <td>${value.congTy}</td>
+                <td>${value.hoaDon}</td>
+                <td>${value.danhGia}</td>
+                <td>
+                    <button id="btnEdit" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="editPerson(${value.id})">Edit</button>
+                    <button id="btnDelete" class="btn btn-danger ml-3" onclick="deletePerson(${value.id})">Delete</button>
+                </td>
+            </tr>
+            `
+        }
+    })
+    getEle('#tableDanhSach').innerHTML = htmlContent;
+
+}
+
+
+/**
+ * @param {*} getInfo
+ * Chức năng: lấy dữ liệu người dùng nhập vào ô dữ liệu trên form
+ * Tham số: không
+ * Chú ý:
+ */
+const getInfo = () => {
     // lấy nguyên cái form rồi dom vào
     const elements = document.querySelectorAll('#personForm input, #personForm select');
     let person = {};
 
     elements.forEach((ele, index) => {
-        // console.log(ele.value, ele.name)
+        // console.log(ele.value, ele.name, index)
         //destructuring
         const { value, name } = ele;
         person[name] = value;
+
     });
 
     // Destructuring (bóc tách phần tử)
-    const {id, namePerson, address, email, type, diemToan, diemLy, diemHoa, day, salary, congTy, hoaDon, danhGia} = person;
+    const { id, namePerson, address, email, type, diemToan, diemLy, diemHoa, day, salary, congTy, hoaDon, danhGia } = person;
 
-    if ( person.type === "Student") {
-        return new Student( id, namePerson, address, email, type, diemToan, diemLy, diemHoa );
+    if (person.type === "Student") {
+        return new Student(id, namePerson, address, email, type, diemToan, diemLy, diemHoa);
     }
-    else if ( person.type === "Employee" ) {
-        return new Employee( id, namePerson, address, email, type, day, salary );
+    else if (person.type === "Employee") {
+        return new Employee(id, namePerson, address, email, type, day, salary);
     }
-    else if ( person.type === "Customer" ) {
-        return new Customer( id, namePerson, address, email, type, congTy, hoaDon, danhGia );
+    else if (person.type === "Customer") {
+        return new Customer(id, namePerson, address, email, type, congTy, hoaDon, danhGia);
     }
     else {
         // do nothing
     }
 }
 
-getEle("#btnThemNV").onclick = () =>{
+
+/**
+ * @param {*} addPerson
+ * Chức năng: thêm người dùng vào API và render ra giao diện
+ * Tham số: không
+ * Chú ý: thêm hàm editFood vào đối tượng window, khi mình ấn edit thì nó sẽ đi tìm trong window có hàm editFood hay ko
+ */
+const addPerson = () => {
+    let loaiDoiTuong = getEle("#personType").value;
     // lấy thông tin món ăn từ user nhập lên form
     const person = getInfo();
-    console.log('person: ', person);
 
-    addPersonList(person)
-    .then((res) => {
-        console.log("res.data", res.data);
-        // call API lấy lại danh sách món ăn mới sau khi thêm thành công
-        fetchPerson();
-        // Đóng modal sau khi add
-        getEle("#btnDong").click();
+    if (loaiDoiTuong === student) {
+        addStudentList(person)
+            .then((res) => {
+                console.log("res.data", res.data);
+                // call API lấy lại danh sách người dùng mới sau khi thêm thành công
+                fetchPerson();
+                // Đóng modal sau khi add
+                getEle("#btnDong").click();
 
-    })
-    .catch((err) => {
-        console.log("err: ", err);
-    })
-    // luôn luôn chạy dù thành công, thất bại
-    .finally(() =>{
-        console.log("Xong");
-    });
+            })
+            .catch((err) => {
+                console.log("err: ", err);
+            })
+            // luôn luôn chạy dù thành công, thất bại
+            .finally(() => {
+                console.log("Xong");
+            });
+    }
+    else if (loaiDoiTuong === employee) {
+        addEmployeeList(person)
+            .then((res) => {
+                console.log("res.data", res.data);
+                // call API lấy lại danh sách người dùng mới sau khi thêm thành công
+                fetchPerson();
+                // Đóng modal sau khi add
+                getEle("#btnDong").click();
+
+            })
+            .catch((err) => {
+                console.log("err: ", err);
+            })
+            // luôn luôn chạy dù thành công, thất bại
+            .finally(() => {
+                console.log("Xong");
+            });
+    }
+    else {
+        addPersonList(person)
+            .then((res) => {
+                console.log("res.data", res.data);
+                // call API lấy lại danh sách người dùng mới sau khi thêm thành công
+                fetchPerson();
+                // Đóng modal sau khi add
+                getEle("#btnDong").click();
+
+            })
+            .catch((err) => {
+                console.log("err: ", err);
+            })
+            // luôn luôn chạy dù thành công, thất bại
+            .finally(() => {
+                console.log("Xong");
+            });
+    }
+
+    resetForm();
 }
 
-// Muốn xài obj thì phải khai new trước
-// bằng cách dùng cái DSNV này mình ko cần phải new những cái obj mới khi mình muốn thêm obj mới
-// var dsnv = new DSNV();
-// var dsnvTheoLoai = new DSNV();
 
-// var dataJson = localStorage.getItem("DSNV");
-// // console.log('dataJson: ', dataJson);
-// if (dataJson !== null) {
-//     // chuyển string thành mảng
-//     dsnv.nhanVien = JSON.parse(dataJson);
-//     // console.log('dsnv.nhanVien : ', dsnv.nhanVien);
-//     // renderTable(dsnv.nhanVien);
-
-//     // Thêm thuộc tính vào cho nhanVien trong dsnv
-//     for (var i = 0; i < dsnv.nhanVien.length; i++) {
-//         // Cách 1:
-//         // var nv = dsnv.nhanVien[i];
-//         // nv = new SinhVien(
-//         //     nv.tkNV,
-//         //     nv.tenSV,
-//         //     nv.email,
-//         //     nv.matKhau,
-//         //     nv.ngaySinh,
-//         //     nv.khoaHoc,
-//         //     nv.diemToan,
-//         //     nv.diemLy,
-//         //     nv.diemHoa
-//         // );
-//         // dsnv.nhanVien[i] = nv;
-
-//         // Cách 2:
-//         dsnv.nhanVien[i] = new NhanVien(
-//             dsnv.nhanVien[i].tkNV,
-//             dsnv.nhanVien[i].tenNV,
-//             dsnv.nhanVien[i].email,
-//             dsnv.nhanVien[i].matKhau,
-//             dsnv.nhanVien[i].ngayLam,
-//             dsnv.nhanVien[i].luongCB,
-//             dsnv.nhanVien[i].chucVu,
-//             dsnv.nhanVien[i].gioLam,
-//         );
-//     }
-//     // console.log('dsnv.nhanVien : ', dsnv.nhanVien);
-//     // dùng map thì code sẽ ngắn gọn như sau
-//     // item tương ứng với từng phần tử trong array
-//     // map dùng giống callback function
-//     // dsnv.nhanVien = JSON.parse(dataJson).map(function (item) {
-//     //     return new SinhVien(
-//     //         item.tkNV,
-//     //         item.tenSV,
-//     //         item.email,
-//     //         item.matKhau,
-//     //         item.ngaySinh,
-//     //         item.khoaHoc,
-//     //         item.diemToan,
-//     //         item.diemLy,
-//     //         item.diemHoa
-//     //     );
-//     // });
-//     renderTable(dsnv.nhanVien);
-// }
-
-// // Hàm lấy thông tin từ giao diện và trả về
-// // Lúc tạo là tham số, truyền vào là đối số
-// function getEle(selector) {
-//     return document.querySelector(selector);
-// }
+/**
+ * @param {*} deletePerson
+ * Chức năng: thêm người dùng vào API và render ra giao diện
+ * Tham số: không
+ * Chú ý:   // nếu dùng const thì nó sẽ bị lỗi is not defined
+            // sửa lại thành window. để nó đem ra global ra ngoài cái file foodList
+            // bất cứ file nào cũng đọc đc file của global nên mình phải đưa ra window
+            // thêm hàm editFood vào đối tượng window, khi mình ấn edit thì nó sẽ đi tìm trong window có hàm editFood hay ko
+ */
+window.deletePerson = (id) => {
+    delPersonList(id)
+        .then((res) => {
+            console.log("res.data", res.data);
+            // call API lấy lại danh sách món ăn mới sau khi xoá thành công
+            fetchPerson();
+        })
+        .catch((err) => {
+            console.log("err: ", err);
+        })
+        // luôn luôn chạy dù thành công, thất bại
+        .finally(() => {
+            console.log("Xong");
+        });
+}
 
 
-// // Hàm reset form
-// function resetForm() {
-//     getEle("#tknv").value = "";
-//     // chỗ reset này ko cần cho disable
-//     getEle("#tknv").disabled = false;
-//     getEle("#name").value = "";
-//     getEle("#email").value = "";
-//     getEle("#password").value = "";
-//     getEle("#datepicker").value = "";
-//     getEle("#luongCB").value = "";
-//     getEle("#chucvu").value = "";
-//     getEle("#gioLam").value = "";
-// }
+/**
+ * @param {*} editPerson
+ * Chức năng: thêm người dùng vào API và render ra giao diện
+ * Tham số: không
+ * Chú ý:   // nếu dùng const thì nó sẽ bị lỗi is not defined
+            // sửa lại thành window. để nó đem ra global ra ngoài cái file foodList
+            // bất cứ file nào cũng đọc đc file của global nên mình phải đưa ra window
+            // thêm hàm editFood vào đối tượng window, khi mình ấn edit thì nó sẽ đi tìm trong window có hàm editFood hay ko
+ */
+// Edit person
+window.editPerson = (id) => {
+    // ẩn btn thêm nhân viên
+    getEle('#btnThemNV').style.display = 'none'
+    // hiện thị btn cập nhật
+    getEle('#btnCapNhat').style.display = 'inline-block'
 
-// // Hàm renderTable với tham số là listArr để đưa thông tin ngoài giao diện
-// function renderTable(listArr) {
-//     // listArr: là tham số có kiểu dữ liệu là 1 mảng
-//     // render table
-//     // Tạo ra 1 string rỗng trước trước khi gán nó vào bảng
-//     var htmlString = "";
+    editPersonByID(id)
+        .then((res) => {
+            console.log("res.data", res.data);
+            let person = res.data
 
-//     for (var i = 0; i < listArr.length; i++) {
-//         var nhanVien = listArr[i];
+            // đưa person.id vào trong button cập nhật
+            // khi làm thế này thì cái button cập nhật của mình sẽ thêm vào cái data-id có id bằng cái id của food mình ấn sửa
+            getEle("#btnCapNhat").setAttribute("data-id", person.id);
 
-//         htmlString += `<tr>
-//             <td>${nhanVien.tkNV}</td>
-//             <td>${nhanVien.tenNV}</td>
-//             <td>${nhanVien.email}</td>
-//             <td>${nhanVien.ngayLam}</td>
-//             <td>${nhanVien.chucVu}</td>
-//             <td>${nhanVien.tinhTongLuong()}</td>
-//             <td>${nhanVien.xepLoai()}</td>
-//             <td>
-//                 <button class="btn btn-danger" onclick="suaNV('${nhanVien.tkNV}')" data-toggle="modal"
-//                 data-target="#myModal">Edit</button>
-//                 <button class="btn btn-danger" onclick="xoaNV('${nhanVien.tkNV}')">Delete</button>
-//             </td>
-//         </tr>`
-//     }
-//     // bỏ dữ liệu vào table đc tạo sẵn bên HTML
-//     getEle("#tableDanhSach").innerHTML = htmlString;
-// }
-
-// // Hàm lấy thông tin từ form
-// function layThongTinTuForm() {
-//     var tkNV = getEle("#tknv").value;
-//     var tenNV = getEle("#name").value;
-//     var email = getEle("#email").value;
-//     var matKhau = getEle("#password").value;
-//     var ngayLam = getEle("#datepicker").value;
-//     var luongCB = getEle("#luongCB").value;
-//     var chucVu = getEle("#chucvu").value;
-//     var gioLam = getEle("#gioLam").value;
-
-//     return new NhanVien(
-//         tkNV,
-//         tenNV,
-//         email,
-//         matKhau,
-//         ngayLam,
-//         luongCB,
-//         chucVu,
-//         gioLam
-//     );
-// }
-
-// function validationNV(value) {
-//     // thông qua hàm layThongTinTuForm mình đã tạo 1 obj NhanVien mới, và dc trả về giá trị đc gán vào nv
-//     var accErr = getEle("#tbTKNV");
-//     var nameErr = getEle("#tbTen");
-//     var emailErr = getEle("#tbEmail");
-//     var passErr = getEle("#tbMatKhau");
-//     var dayErr = getEle("#tbNgay");
-//     var salaryErr = getEle("#tbLuongCB");
-//     var positionErr = getEle("#tbChucVu");
-//     var hourErr = getEle("#tbGiolam");
-
-//     var messBlankTK = "Mã nhân viên không đc để trống";
-//     var messLengthTK = "Độ dài mã nhân viên phải 4-6 ký tự";
-//     var messBlankName = "Tên nhân viên không đc để trống";
-//     var messCharName = "Tên nhân viên phải là chữ";
-//     var messBlankMail = "Email nhân viên không đc để trống";
-//     var messFormMail = "Email nhân viên không đúng định dạng";
-//     var messBlankPass = "Mật khẩu nhân viên không đc để trống";
-//     var messPass = "Mật khẩu nhân viên phải chứa ít nhất ,1 số, 1 ký tự in hoa, 1 ký tự đặc biệt và dài 6-10 ký tự ";
-//     var messBlankDay = "Ngày làm không đc để trống";
-//     var messFormDay = "Ngày làm phải đúng định dạng dd/mm/yyyy";
-//     var messBlankSalary = "Lương không đc để trống";
-//     var messMinMaxSalary = "Lương phải là số trong 1000000-20000000";
-//     var messTruePosition = "Chức vụ không hợp lệ";
-//     var messBlankHour = "Số giờ làm không đc để trống";
-//     var messMinMaxHour = "Số giờ làm phải là số trong 80-200 giờ";
-//     var messCheckNnum = "Số giờ làm phải là số";
-
-//     // sử dụng "&&" chỉ chạy khi tất cả đều đúng, nên khi thằng đầu sai nó sẽ ko chạy thằng sau nữa
-//     // còn nếu sd & thì nó chạy thằng thứ nhất xong dù đúng hay sai nó vẫn chạy thằng thứ 2
-//     // ① "&"
-//     // Toán tử  "&" là 1 toán tử logic cũng là bitwise(ビット演算: AND, OR, XOR, NOT, Shift)
-//     // Nó đánh giá 2 trá trị trước sau của mình
-//     // Kết quả trả lại giá trị nhị phân nếu trong TH đánh giá dữ liệu booleans
-//     // Hoạt động dựa trên dữ liệu booleans(True or False) và dữ liệu nhị phân
-//     // Sử dụng để kiểm tra điều kiện logic và cũng được sử dụng để che dấu các bit nhất định như bit chẵn lẻ.
-//     // ②"&&"
-//     // Toán tử  "&" hoàn toàn là toán tử logic
-//     // Nó đánh giá trá trị trước mình đúng thì nó mới đánh giá trị theo sau mình
-//     // Chỉ được sử dụng để kiểm tra điều kiện logic.
-
-//     // kiểm tra mã tài khoản nv có bỏ trống, và có đúng số ký tự hay ko
-//     var valid = kiemTraRong(value.tkNV, accErr, messBlankTK) && kiemTraDoDai(value.tkNV, accErr, 4, 6, messLengthTK);
-
-//     // kiểm tra tên value có bỏ trống, và có ký tự nào ngoài chữ hay ko
-//     valid &= kiemTraRong(value.tenNV, nameErr, messBlankName) && kiemTraChuoi(value.tenNV, nameErr, messCharName);
-
-//     // kiểm tra email có bỏ trống, và đúng định dạng của email hay ko
-//     valid &=
-//         kiemTraRong(value.email, emailErr, messBlankMail) &&
-//         kiemTraEmail(value.email, emailErr, messFormMail);
-
-//     // kiểm tra mật khẩu có bỏ trống, và đúng định dạng của mật khẩu (có 1 số, 1 ký tự thường, 1 ký tự in hoa và dài 6-10 ký tự) hay ko
-//     valid &=
-//         kiemTraRong(value.matKhau, passErr, messBlankPass) &&
-//         kiemTraMatKhau(value.matKhau, passErr, messPass);
-
-//     // kiểm tra ngày làm có để trống và đúng định dạng dd/mm/yyy hay ko
-//     valid &=
-//         kiemTraRong(value.ngayLam, dayErr, messBlankDay) &&
-//         kiemTraDinhDangNgay(value.ngayLam, dayErr, messFormDay);
-
-//     // kiểm tra lương có để trống hay ko
-//     valid &=
-//         kiemTraRong(value.luongCB, salaryErr, messBlankSalary) && kiemTraLonNho(value.luongCB, salaryErr, 1000000, 20000000, messMinMaxSalary);
-
-//     // kiểm tra chức có hợp lệ hay ko
-//     var chucVu = ["Giám đốc", "Trưởng phòng", "Nhân viên"];
-//     valid &= kiemTraChucVu(value.chucVu, chucVu, positionErr, messTruePosition);
-
-//     // kiểm tra số giờ làm có để trống hay ko
-//     valid &=
-//         kiemTraRong(value.gioLam, hourErr, messBlankHour) &&
-//         kiemTraSo(value.gioLam, hourErr, messCheckNnum) &&
-//         kiemTraLonNho(value.gioLam, hourErr, 80, 200, messMinMaxHour);
-
-//     if (valid) {
-//         return valid;
-//     }
-//     else {
-//         accErr.style.display = "block";
-//         nameErr.style.display = "block";
-//         emailErr.style.display = "block";
-//         passErr.style.display = "block";
-//         dayErr.style.display = "block";
-//         salaryErr.style.display = "block";
-//         positionErr.style.display = "block";
-//         hourErr.style.display = "block";
-//     }
-// }
-
-// // Hàm thêm nhân viên
-// function ThemNV() {
-//     var nv = layThongTinTuForm();
-
-//     // Do kiểm tra trùng ko dùng trong phần cập nhật nên phải sử dụng riêng mình nó ở đây
-//     var accErr = document.querySelector("#tbTKNV");
-//     var messDuplicateTK = "Mã nhân viên này đã tồn tại";
-//     var valid = validationNV(nv) && kiemTraTrung(nv.tkNV, dsnv.nhanVien, accErr, messDuplicateTK);
-
-//     if (valid) {
-//         // sau khi kiểm tra validation rồi thì dùng hàm _themNhanVien bên DSNV để push thuộc tính trong nv vào obj nhanVien
-//         dsnv._themNhanVien(nv);
-//         // console.log("dsnv", dsnv.nhanVien);
-
-//         // localStorage: nơi lưu trữ (chỉ chấp nhận json) - json là 1 kiểu dữ liệu
-//         // JSON.stringify: convert array to json
-//         var data = JSON.stringify(dsnv.nhanVien);
-//         // lưu data xuống localStorage
-//         localStorage.setItem("DSNV", data);
-
-//         resetForm();
-//         renderTable(dsnv.nhanVien);
-//     }
-//     else {
-//         accErr.style.display = "block";
-//     }
-// }
+            getEle("#personID").value = person.id;
+            getEle("#personName").value = person.namePerson;
+            getEle("#personAddress").value = person.address;
+            getEle("#personEmail").value = person.email;
+            getEle("#personType").value = person.type;
+            xetLoaiDoiTuong();
+            if (person.type === "Student") {
+                getEle("#studentDiemToan").value = person.diemToan;
+                getEle("#studentDiemLy").value = person.diemLy;
+                getEle("#studentDiemHoa").value = person.diemHoa;
+            }
+            else if (person.type === "Employee") {
+                getEle("#employeeDay").value = person.day;
+                getEle("#employeeSalary").value = person.salary;
+            }
+            else if (person.type === "Customer") {
+                getEle("#customerCongTy").value = person.congTy;
+                getEle("#customerHoaDon").value = person.hoaDon;
+                getEle("#customerDanhGia").value = person.danhGia;
+            }
+            else {
+                // do nothing
+            }
+        })
+        .catch((err) => {
+            console.log("err: ", err);
+        })
+        // luôn luôn chạy dù thành công, thất bại
+        .finally(() => {
+            console.log("Xong");
+        });
+}
 
 
-// // Hàm xoá sinh viên
-// function xoaNV(maNVTuButton) {
-//     dsnv._xoaNhanVien(maNVTuButton);
-//     renderTable(dsnv.nhanVien);
-//     // Xoá xong phải update dữ liệu lại cho local storage ko thì F5 xong nó lại hiện ra như chưa xoá
-//     // localStorage: nơi lưu trữ (chỉ chấp nhận json) - json là 1 kiểu dữ liệu
-//     // JSON.stringify: convert array to json
-//     var data = JSON.stringify(dsnv.nhanVien);
-//     // lưu data xuống localStorage
-//     localStorage.setItem("DSNV", data);
-// }
+/**
+ * @param {*} updatePerson
+ * Chức năng: cập nhật person
+ * Tham số: không
+ * Chú ý: 
+ */
+const updatePerson = () => {
+
+    // lấy thông tin person sau khi chỉnh sửa
+    const person = getInfo();
+
+    // lấy id của person muốn cập nhật
+    // cái data-id này đã đc set trong hàm editPerson
+    const idPer = getEle("#btnCapNhat").getAttribute("data-id")
+
+    updatePersonByID(idPer, person)
+        .then((res) => {
+            console.log("res.data", res.data);
+
+            // call API lấy lại danh sách person mới sau khi xoá thành công
+            fetchPerson();
+            // cập nhât xong thì đóng modal
+            getEle("#btnDong").click();
+        })
+        .catch((err) => {
+            console.log("err: ", err);
+        })
+        // luôn luôn chạy dù thành công, thất bại
+        .finally(() => {
+            console.log("Xong");
+        });
+}
 
 
-// // Hàm sửa sinh viên
-// // Hàm này để đưa thông tin SV đc click lên table
-// function suaNV(maSVTuButton) {
-//     var nv = dsnv._layThongTinNhanVien(maSVTuButton);
+/**
+ * @param {*} arrangePerToOrder
+ * Chức năng: Sắp xếp person theo họ tên
+ * Tham số: không
+ * Chú ý: thêm hàm editFood vào đối tượng window, khi mình ấn edit thì nó sẽ đi tìm trong window có hàm editFood hay ko
+ */
+const arrangePerToOrder = () => {
+    getPersonList()
+        // thành công thì in ra sp
+        .then(function (res) {
+            const person = res.data;
+            const result = person.sort((a, b) => a.namePerson.localeCompare(b.namePerson));
+            renderTable(result);
 
-//     if (nv) {
-//         getEle("#tknv").value = nv.tkNV;
-//         // khi sửa thì ko đc sửa mã NV thì ta nên làm ẩn để user ko sửa đc
-//         getEle("#tknv").disabled = true;
-//         getEle("#name").value = nv.tenNV;
-//         getEle("#email").value = nv.email;
-//         getEle("#password").value = nv.matKhau;
-//         getEle("#datepicker").value = nv.ngayLam;
-//         getEle("#luongCB").value = nv.luongCB;
-//         getEle("#chucvu").value = nv.chucVu;
-//         getEle("#gioLam").value = nv.gioLam;
-//     }
-// }
+        })
+        // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
+        .catch(function (err) {
+            console.log("err", err);
+        })
+        // luôn luôn chạy dù thành công, thất bại
+        .finally(() => {
+            console.log("Xong");
+        });
 
-// // Hàm cập nhật nhân viên
-// // trước khi cập nhật thì nó lại lấy thông tin đã đc sửa từ trên table xuống
-// function capNhatNV() {
-//     var nv = layThongTinTuForm();
-//     var valid = validationNV(nv);
-//     if (valid) {
-//         dsnv._capNhatNhanVien(nv);
-//         resetForm();
-//     }
-//     else {
-//         // do nothing
-//     }
+}
 
-//     renderTable(dsnv.nhanVien);
+/*
+* @param {*} filterPerson
+* Chức năng: hàm lọc person
+* Tham số: không
+* Chú ý:
+*/
+const filterPerson = () => {
+    var selectPersonType = getEle("#selectPersonType").value;
+    var filterResult = [];
+    var all = "All";
 
-//     // Sửa xong phải update dữ liệu lại cho local storage ko thì F5 xong nó lại hiện ra như chưa sửa
-//     // localStorage: nơi lưu trữ (chỉ chấp nhận json) - json là 1 kiểu dữ liệu
-//     // JSON.stringify: convert array to json
-//     var data = JSON.stringify(dsnv.nhanVien);
-//     // lưu data xuống localStorage
-//     localStorage.setItem("DSNV", data);
-// }
-
-
-// // Hàm tìm kiếm sinh viên
-// // trước khi cập nhật thì nó lại lấy thông tin đã đc sửa từ trên table xuống
-// function timNV() {
-//     var loaiNVErr = getEle("#tbLoaiNV");
-//     var textSearch = getEle("#searchName").value.trim()?.toLowerCase();
-//     var messNotFound = "Không tìm thấy loại nhân viên này";
-//     var messFound = "Kết quả tìm kiếm được như sau";
-//     var messReqToType = "Vui lòng nhập từ khoá";
-//     var result = [];
-
-//     if (textSearch.length > 0) {
-//         result = dsnv.nhanVien.filter(function (nv) {
-//             // tìm kiếm trong danh sách nhân viên mà có xếp loại sau khi đã chuyển về từ thường mà có gồm từ khoá mà muốn tra
-//             return nv.xepLoai().toLowerCase().includes(textSearch);
-//         });
-//         renderTable(result);
-//         console.log('result: ', result);
-//     } else {
-//         renderTable(dsnv.nhanVien);
-//     }
-
-//     if (textSearch.length == 0) {
-//         loaiNVErr.innerHTML = messReqToType;
-//         loaiNVErr.style.display = "block";
-//     }
-//     else if (textSearch.length > 0 && result == "") {
-//         loaiNVErr.innerHTML = messNotFound;
-//         loaiNVErr.style.display = "block";
-//     }
-//     else {
-//         loaiNVErr.innerHTML = messFound;
-//         loaiNVErr.style.display = "block";
-//     }
-
-//     // index = dsnv._timViTriNhanVienTheoLoai(loaiNV);
+    getPersonList()
+        // thành công thì in ra person
+        .then(function (res) {
+            var person = res.data;
+            if (selectPersonType === all) {
+                renderTable(person);
+            }
+            else {
+                person.forEach((value, index) => {
+                    if (value.type === selectPersonType) {
+                        filterResult.push(value);
+                    }
+                })
+                renderTableByType(filterResult);
+            }
+        })
+        // thất bại thì báo lỗi, hoặc in ra thông báo tuỳ mình
+        .catch(function (err) {
+            console.log("err", err);
+        });
+}
 
 
-//     /*
-//     var htmlString = "";
+/*
+* @param {*} findPersonByName
+* Chức năng: hàm tìm kiếm person theo name
+* Tham số: không
+* Chú ý:
+*/
+const findPersonByName = () => {
+    var searchName = getEle("#searchName").value.trim()?.toLowerCase();
+    var tbfilterPerson = document.querySelector("#tbFilterPerson");
 
-//     for (var i = 0; i < index.length; i++) {
-//         var nhanVien = dsnv.nhanVien[index[i]];
+    // gọi data từ API
+    getPersonList()
+        .then(function (res) {
+            var person = res.data;
+            // tìm kiếm trong danh sách sp mà có tên sau khi đã chuyển về từ thường mà có gồm từ khoá mà muốn tra
+            var result = person.filter(function (value) {
+                return value.namePerson.toLowerCase().includes(searchName);
+            });
 
-//         htmlString += `<tr>
-//             <td>${nhanVien.tkNV}</td>
-//             <td>${nhanVien.tenNV}</td>
-//             <td>${nhanVien.email}</td>
-//             <td>${nhanVien.ngayLam}</td>
-//             <td>${nhanVien.chucVu}</td>
-//             <td>${nhanVien.tinhTongLuong()}</td>
-//             <td>${nhanVien.xepLoai()}</td>
-//             <td>
-                
-//             </td>
-//         </tr>`
-//         tableLoaiNVBody.innerHTML = htmlString;
-//     }
-//     */
-// }
+            if (result.length == 0) {
+                tbfilterPerson.classList.remove("d-none");
+                tbfilterPerson.classList.add("d-block");
+            } else {
+                tbfilterPerson.classList.remove("d-block");
+                tbfilterPerson.classList.add("d-none");
+                //render lại kết quả tìm thấy
+                renderTable(result);
+            }
+        })
+        .catch(function (err) {
+            console.log("err", err);
+        });
+}
+
+
+/*
+* @param {*} ẩn nút cập nhật khi ấn bút thêm hàm tìm kiếm person theo name
+* Tham số: không
+* Chú ý:
+*/
+getEle("#btnThem").onclick = () => {
+    // ẩn btn cập nhật
+    getEle('#btnCapNhat').style.display = 'none';
+    // hiển btn thêm
+    getEle('#btnThemNV').style.display = 'inline-block';
+}
+
+
+/*
+* @param {*} reset form
+* Tham số: không
+* Chú ý:
+*/
+getEle("#btnReset").onclick = () => {
+    resetForm();
+}
 

@@ -1,136 +1,87 @@
 const BASE_URL = "https://651d525844e393af2d598dd0.mockapi.io/person";
-
-
-class ListPerson {
-    
-    // mảng đối tượng này chứa các đối tượng khác nhau
-    constructor(
-        _id,
-        _name,
-        _address,
-        _email,
-        _type,
-        _toan,
-        _ly,
-        _hoa,
-        _day,
-        _salary,
-        _congTy,
-        _hoaDon,
-        _danhGia   
-        ) {
-        this.id = _id;
-        this.namePerson = _name;
-        this.address = _address;
-        this.email = _email;
-        this.type = _type;
-        this.diemToan = _toan;
-        this.diemLy = _ly;
-        this.diemHoa = _hoa;
-        this.day = _day;
-        this.salary = _salary;
-        this.congTy = _congTy;
-        this.hoaDon = _hoaDon;
-        this.danhGia = _danhGia;
-        
-        this.person = [];
-    }
-    
-    // Phương thức thêm product, hàm này chỉ có chức năng duy nhất là thêm sản phẩm
-    addPerson = (sp) => {
-        this.person.push(sp);
-    };
-
+const getPersonList = (val) => {
+    return axios({
+        url: BASE_URL,
+        method: "GET",
+        // những cặp key-value khai báo bên trong object params sẽ đc gửi lên url theo định dạng
+        // example.com/products?key1=value1&key2=value2
+        params: {
+        name: val || undefined,
+        },
+    });
 }
 
-// Class for creating multi inheritance.
-// class multi
-// {
-// 	// Inherit method to create base classes.
-// 	static inherit(..._bases)
-// 	{
-// 		class classes {
+const delPersonList = (id) => {
+    return axios({
+        url: `${BASE_URL}/${id}`,
+        method: "DELETE",
+    });
+}
 
-// 			// The base classes
-//   			get base() { return _bases; }
+const addPersonList = (per) => {
+    // nhớ phải có return
+    return axios({
+        url: BASE_URL,
+        method: "POST",
+        // phải có data mới up lên đc APi
+        data: per,
+    });
+}
 
-// 			constructor(..._args)
-// 			{
-// 				var index = 0;
+const addStudentList = (per) => {
+    // nhớ phải có return
+    return axios({
+        url: BASE_URL,
+        method: "POST",
+        // phải có data mới up lên đc APi
+        data: {
+            // spread operator
+            ...per,
+            diemTB: per.tinhDiemTB(),
+        },
+    });
+}
 
-// 				for (let b of this.base) 
-// 				{
-// 					let obj = new b(_args[index++]);
-//    					multi.copy(this, obj);
-// 				}
-// 			}
-		
-// 		}
+const addEmployeeList = (per) => {
+    // nhớ phải có return
+    return axios({
+        url: BASE_URL,
+        method: "POST",
+        // phải có data mới up lên đc APi
+        data: {
+            // spread operator
+            ...per,
+            tienLuong: per.tinhLuong(),
+        },
+    });
+}
 
-// 		// Copy over properties and methods
-// 		for (let base of _bases) 
-// 		{
-//    			multi.copy(classes, base);
-//    			multi.copy(classes.prototype, base.prototype);
-// 		}
+const editPersonByID = (id) => {
+    // nhớ phải có return
+    return axios({
+        url: `${BASE_URL}/${id}`,
+        method: "GET",
+    });
+}
 
-// 		return classes;
-// 	}
-
-// 	// Copies the properties from one class to another
-// 	static copy(_target, _source) 
-// 	{
-//     		for (let key of Reflect.ownKeys(_source)) 
-// 			{
-//         		if (key !== "constructor" && key !== "prototype" && key !== "name") 
-// 				{
-// 	        	    let desc = Object.getOwnPropertyDescriptor(_source, key);
-// 	        	    Object.defineProperty(_target, key, desc);
-//         		}
-//     		}
-// 	}
-// }
-
-// // class Dog{
-// // 	constructor(hands){
-// //   	this.hand = hands;
-// //   }
-  
-// //   callHandDog(){
-// //   	console.log('callHandDog>>', this.hand);
-// //   }
-// // }
-
-// // class Pig{
-// // 	constructor(hands){
-// //   	this.hand = hands;
-// //   }
-  
-// //   callHandPig(){
-// //   	console.log('callHandPig>>', this.hand);
-// //   }
-  
-// // }
-
-
-// class ListPerson extends multi.inherit(Student, Employee, Customer){
-// 	constructor(_id, _name, _address, _email, _toan, _ly, _hoa, _day, _salary, _congTy, _hoaDon, _danhGia){
-//     super(_id, _name, _address, _email);
-  	
-//   }
-  
-//   init(){
-//   	super.callHandPig();
-//     super.callHandDog();
-//   }
-  
-// }
-
-// const _animal = new Animal(4);
-// _animal.init();
-//(index):97 callHandPig>> 4
-//(index):87 callHandDog>> 4
-
-
-
-
+const updatePersonByID = (id, per) => {
+    if ( per.type === "Student" ) {
+        per = {
+            ...per,
+            diemTB: per.tinhDiemTB(),
+        }
+    }
+    else if ( per.type === "Employee" ) {
+        per = {
+            ...per,
+            tienLuong: per.tinhLuong(),
+        }
+    }
+    // nhớ phải có return
+    return axios({
+        url: `${BASE_URL}/${id}`,
+        method: "PUT",
+        // phải có data mới up lên đc API
+        data: per,
+    });
+}
